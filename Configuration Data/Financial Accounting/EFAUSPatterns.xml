@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- Sistema: Empiria® Central Components       Documento: User Services Patterns  -->
+<!-- Fecha  : 20/Diciembre/2001       		Autor    : José Manuel Cota        -->
+<patterns>
+ <pattern name="CboParticipantTypes">
+   <source>
+     <![CDATA[
+	<OPTION value=0>Todos</OPTION>¬
+	<OPTION value=1>Usuarios</OPTION>¬
+	<OPTION value=2>Grupos de trabajo o roles</OPTION>¬
+	<OPTION value=3>Organizaciones</OPTION>¬
+	<OPTION value=4>Sistemas</OPTION>¬
+     ]]>
+   </source>
+ </pattern>
+ <pattern name="ToDoQuickBarRow">
+   <source>
+     <![CDATA[
+	<TR><TD><img align=absmiddle src='/empiria/images/workflow/<@IMAGE_FILE@>'>
+		<a href='/empiria/workflow/inboxes/<@INBOX@>'>&nbsp; <b><@TASK_COUNT@></b> <@TASK_NAME@></a>
+	</TD></TR>¬
+     ]]>
+   </source>
+ </pattern>
+ <pattern name="TasksQuickBarLabelRow">
+   <source>
+     <![CDATA[
+	<TR><TD><@LABEL@></TD></TR>¬
+     ]]>
+   </source>
+ </pattern>
+ <pattern name="TasksQuickBarTasksRow">
+   <source>
+     <![CDATA[
+	<TR><TD title='<@TASK_DESCRIPTION@>'>
+		<A href='/empiria/workflow/engine/run_task_app.asp?id=<@TASKID@>'><@TASK_SHORT_NAME@></A>
+	</TD></TR>¬
+      ]]>
+      </source>
+   </pattern>
+</patterns>

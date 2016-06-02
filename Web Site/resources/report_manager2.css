@@ -1,0 +1,265 @@
+BODY
+{
+    BACKGROUND-COLOR: #ffebcd;
+    COLOR: #000000;
+    FONT-FAMILY: Tahoma, Arial, Helvetica, sans-serif;
+    FONT-SIZE: 8pt
+}
+A:link
+{
+    COLOR: #b22222;
+    TEXT-DECORATION: none
+}
+A:visited
+{
+    COLOR: #8b0000;
+    TEXT-DECORATION: none
+}
+A:active
+{
+    COLOR: #b22222;
+    TEXT-DECORATION: none
+}
+A:hover
+{
+    COLOR: #000000;
+    TEXT-DECORATION: underline
+}
+.imageBtn
+{
+    CURSOR: hand
+}
+A.virtualLink
+{
+    COLOR: #c74a36;
+    CURSOR: hand;
+    TEXT-DECORATION: none
+}
+SELECT
+{
+    FONT-FAMILY: Arial, Tahoma, Helvetica, sans-serif;
+    FONT-SIZE: 8pt;
+    HEIGHT: 20px
+}
+TEXTAREA
+{
+    FONT-FAMILY: Arial, Tahoma, Helvetica, sans-serif;
+    FONT-SIZE: 8pt
+}
+INPUT
+{
+    FONT-FAMILY: Arial, Tahoma, Helvetica, sans-serif;
+    FONT-SIZE: 8pt;
+    HEIGHT: 20px
+}
+TABLE
+{
+    FONT-FAMILY: Tahoma, Arial, Helvetica, sans-serif;
+    FONT-SIZE: 8pt
+}
+TABLE.fullScrollMenu
+{
+    BACKGROUND-COLOR: #ffcd99;
+    BORDER-BOTTOM: #ffcd99 thin outset;
+    BORDER-COLLAPSE: collapse;
+    BORDER-LEFT: #ffcd99 thin outset;
+    BORDER-RIGHT: #ffcd99 thin outset;
+    BORDER-TOP: #ffcd99 thin outset;
+    WIDTH: 100%
+}
+TABLE.applicationTable
+{
+    BACKGROUND-COLOR: #ffcd99;
+    BORDER-BOTTOM: #ffcd99 thin outset;
+    BORDER-COLLAPSE: collapse;
+    BORDER-LEFT: #ffcd99 thin outset;
+    BORDER-RIGHT: #ffcd99 thin outset;
+    BORDER-TOP: #ffcd99 thin outset;
+    WIDTH: 100%
+}
+TR.applicationTableHeader
+{
+    BACKGROUND-COLOR: #f0f28c;
+    COLOR: #b22222;
+    FONT-SIZE: 8pt;
+    FONT-WEIGHT: bold;
+    VERTICAL-ALIGN: middle
+}
+TR.applicationTableHeader A
+{
+    COLOR: #b22222
+}
+TR.applicationTableHeader A:link
+{
+    COLOR: #b22222
+}
+TR.applicationTableHeader A:hover
+{
+    COLOR: #b22222;
+    FONT-SIZE: 8pt;
+    TEXT-DECORATION: underline
+}
+TR.applicationTableHeader A:visited
+{
+    COLOR: #b22222;
+    FONT-SIZE: 8pt
+}
+TR.applicationTableHeader A:active
+{
+    COLOR: #b22222;
+    FONT-SIZE: 8pt
+}
+TABLE.applicationTable TD
+{
+    BORDER-BOTTOM: #ffb899 thin solid;
+    BORDER-LEFT: #ffb899 thin solid;
+    PADDING-BOTTOM: 3px;
+    PADDING-TOP: 3px;
+    VERTICAL-ALIGN: top
+}
+TR.applicationTableSelectedRow
+{
+    BACKGROUND-COLOR: #ffb899
+}
+TR.applicationTableSelectedRow TD
+{
+    BORDER-BOTTOM: #ffcd99 thin solid
+}
+.applicationTitle
+{
+    COLOR: black;
+    FONT-FAMILY: Tahoma, Verdana, Arial;
+    FONT-SIZE: 11pt;
+    FONT-WEIGHT: 600;
+    PADDING-LEFT: 3px
+}
+IMG
+{
+    BORDER-BOTTOM: medium none;
+    BORDER-LEFT: medium none;
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    CURSOR: hand
+}
+TABLE.fullScrollMenu TD
+{
+    COLOR: #f0e68c;
+    PADDING-BOTTOM: 2pt;
+    PADDING-LEFT: 2pt;
+    PADDING-RIGHT: 2pt;
+    PADDING-TOP: 2pt;
+    VERTICAL-ALIGN: middle
+}
+TR.fullScrollMenuHeader
+{
+    BACKGROUND-COLOR: #808080;
+    COLOR: white;
+    FONT-SIZE: 8pt;
+    VERTICAL-ALIGN: text-top
+}
+TR.fullScrollMenuHeader A
+{
+    COLOR: white;
+    FONT-SIZE: 8pt;
+    FONT-WEIGHT: normal
+}
+TR.fullScrollMenuHeader A:active
+{
+    COLOR: white;
+    FONT-SIZE: 8pt
+}
+TR.fullScrollMenuHeader A:hover
+{
+    COLOR: white;
+    FONT-SIZE: 8pt;
+    TEXT-DECORATION: underline
+}
+TR.fullScrollMenuHeader A:link
+{
+    COLOR: white;
+    FONT-SIZE: 8pt
+}
+TR.fullScrollMenuHeader A:visited
+{
+    COLOR: white;
+    FONT-SIZE: 8pt;
+    FONT-WEIGHT: normal
+}
+.fullScrollMenuTitle
+{
+    COLOR: #f0e68c;
+    FONT-SIZE: 10pt;
+    FONT-WEIGHT: bold
+}
+.cmdSubmit
+{
+    BACKGROUND-COLOR: #ffebcd;
+    BACKGROUND-IMAGE: none;
+    BACKGROUND-REPEAT: repeat;
+    BORDER-BOTTOM: #990300 1px solid;
+    BORDER-LEFT: #ffa07a 1px solid;
+    BORDER-RIGHT: #990300 1px solid;
+    BORDER-TOP: #ffa07a 1px solid;
+    COLOR: #990300;
+    CURSOR: hand;
+    FONT-FAMILY: tahoma,sans-serif;
+    FONT-SIZE: 11px;
+    HEIGHT: 23px;
+    TEXT-DECORATION: none
+}
+TABLE.standardPageTable
+{
+    BACKGROUND-COLOR: #ffa07a;
+    WIDTH: 100%
+}
+TR.applicationTableRowDivisor
+{
+    BACKGROUND-COLOR: #ffcb7a;
+    COLOR: #000000;
+    HEIGHT: 10px;
+    VERTICAL-ALIGN: top
+}
+TR.applicationTableRowDivisor TD
+{
+    BORDER-LEFT: medium none;
+    BORDER-RIGHT: medium none
+}
+BODY.bdyDialogBox
+{
+    BACKGROUND-COLOR: #ffa07a;
+    MARGIN: 0px
+}
+TD.fullScrollMenuCell
+{
+    BACKGROUND-COLOR: #808080;
+    COLOR: white;
+    FONT-SIZE: 8pt
+}
+TD.fullScrollMenuCell A
+{
+    COLOR: white;
+    FONT-SIZE: 8pt;
+    FONT-WEIGHT: bold;
+    TEXT-DECORATION: none
+}
+TD.fullScrollMenuCell A:link
+{
+    COLOR: white;
+    FONT-SIZE: 8pt;
+    FONT-WEIGHT: bold;
+    TEXT-DECORATION: none
+}
+TD.fullScrollMenuCell A:visited
+{
+    COLOR: white;
+    FONT-SIZE: 8pt;
+    FONT-WEIGHT: bold;
+    TEXT-DECORATION: none
+}
+TD.fullScrollMenuCell A:active
+{
+    COLOR: white;
+    FONT-SIZE: 8pt;
+    FONT-WEIGHT: bold;
+    TEXT-DECORATION: none
+}

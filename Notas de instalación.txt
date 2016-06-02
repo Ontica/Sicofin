@@ -1,0 +1,321 @@
+Sistema Internet de Contabilidad Financiera Empiria® versión 1.0
+Individualización para el Banco Nacional de Obras y Servicios Públicos, S.N.C
+---------------------------------------------------------------------------------
+
+Copyright (c) La Vía Ontica, S.C. México 1999-2002. Todos los derechos reservados.
+
+Empiria, Ontica, La Vía Ontica y Mahler, así como sus logotipos, son marcas 
+registradas por La Vía Ontica, S.C. en México.
+
+El software, su documentación, así como todos los elementos de configuración 
+y diseño del mismo están protegidos por las leyes federales e internacionales 
+de derechos de autor. 
+
+MUY IMPORTANTE: Toda violación a los derechos de autor de esta obra será 
+                perseguida hasta sus últimas consecuencias, conforme a las 
+                leyes aplicables en México y en el extranjero.
+
+---------------------------------------------------------------------------------
+0.   Contenido
+---------------------------------------------------------------------------------
+
+1.   Requisitos del sistema
+1.   Requisitos mínimos de instalación.
+1.1  Servidor de aplicación
+     Hardware
+     Software
+1.2  Servidor de datos de la familia Micorosft Windows distinto al de aplicación
+     Instalación bajo Oracle
+     Instalación bajo Microsoft SQL Server
+     Instalación bajo Microsoft Access
+1.3  Otros servidores de acceso a datos
+1.4  Equipos cliente
+
+2.   Pasos previos a la instalación
+2.1  Servidor de la aplicación
+2.2  Servidores de base de datos
+
+3.   Instalación del Sistema Internet de Contabilidad Financiera
+3.1  Registro de componentes
+3.2  Registro de los parámetros de configuración
+3.3  Instalación de la base de datos
+3.4  Instalación del sitio web Empiria.
+
+
+----------------------------------------------------------------------------------
+1.  Requisitos del sistema
+----------------------------------------------------------------------------------
+
+    Para instalar El Sistema Internet de Contabilidad Financiera se necesita:
+
+1.1 Servidor de aplicación
+
+    Hardware
+    
+    Procesador Pentium II a 333 Mhz o superior (Pentium III a 500 Mhz recomendado)
+    256 MB en RAM como mínimo (512 MB en RAM recomendado)
+    100 MB de espacio libre en disco (300 MB recomendado) (*ver nota)
+    Unidad CD-ROM o DVD
+    Teclado y Microsoft Mouse o compatibles
+    Monitor y adapatador de video SVGA (800x600) o de mayor resolución
+
+
+    (*) El espacio en disco recomendado sólo incluye lo necesario para ejecutar la 
+        aplicación.
+        Puede requerirse mayor espacio para instalar software de sistema.
+
+
+    Software
+
+    Sistema operativo Microsoft Windows 2000 professional, Server o Advanced 
+    server o Windows XP Professional. (Windows 2000 Server recomendado)
+    Service Packs y parches de seguridad actualizados.
+    Internet Information Server 5.0
+    Microsoft Internet Explorer 5.1 o superior (5.5 recomendado)
+    Microsoft Data Access Components 2.7
+    Runtime interpreter de Visual Basic 6.0
+    Visual Basic 6.0 Service Pack 3.0 o superior
+    Microsoft Office 2000 Professional
+    
+
+
+1.2  Servidor de datos de la familia Micorosft Windows distinto al de aplicación
+
+     Procesador Pentium II a 333 Mhz o superior (Pentium III a 500 Mhz recomendado)
+     256 MB en RAM como mínimo (512 MB en RAM recomendado)        
+     Sistema operativo Microsoft Windows 2000 professional, Server o Advanced 
+     server o Windows XP Professional. (Windows 2000 Server recomendado)
+     Service Packs y parches de seguridad actualizados.
+     500 MB de espacio libre en disco para la base de datos (2 GB recomendado)    
+     Unidad CD-ROM o DVD
+     Teclado y Microsoft Mouse o compatibles
+     Monitor y adapatador de video SVGA (800x600) o de mayor resolución
+
+     Instalación bajo Oracle
+                 
+        Oracle8i Enterprise Edition Release 8.1.6 o superior
+        Una licencia de cliente del manejador de base de datos (2 licencias recomendado)
+
+     
+     Instalación bajo Microsoft SQL Server
+
+	SQL Server 6.0 Enterprise Edition o superior (SQL Server 2000 recomendado)
+        Una licencia de cliente del manejador de base de datos (2 licencias recomendado)
+
+     
+     Instalación bajo Microsoft Access
+
+	Microsft Access 2000 o superior.
+
+
+1.3  Otros servidores de acceso a datos
+
+     Servidor con procesador a 333 Mhz o superior (500 Mhz recomendado)
+     Sistema operativo cualquiera donde se pueda ejecutar Oracle 8i versión 8.1.6
+     Oracle 8.1.6 Enterprise Edition o superior
+     500 MB de espacio libre en disco para la base de datos (2 GB recomendado)
+     Unidad CD-ROM o DVD
+     Monitor y adapatador de video SVGA (800x600) o de mayor resolución
+     Teclado y ratón
+
+1.4 Equipos cliente
+
+    Computadora con procesador de 100Mhz o superior
+    Cualquier sistema operativo para el que exista una versión de 
+    Microsoft Internet Explorer 5.1 o superior (Windows 95 o superior recomendado)
+    Internet Explorer 5.1 o superior (Internet Explorer 5.5 recomendado)
+    Conexión al servidor de la aplicación mediante TCP/IP vía la intranet corporativa
+    o a través de Internet
+    Monitor y adapatador de video SVGA (800x600) o de mayor resolución (1280x1024 recomendado)   
+    Teclado y ratón (Micosoft Mouse con track ball o compatible recomendado)
+    Enlace a Internet vía un Modem de 56Kbps o superior para acceso vía Internet de 
+    la aplicación.
+
+    IMPORTANTE: No es necesario licenciar el acceso al servidor de base de datos
+                para cada uno de los equipos cliente. Los equipos cliente nunca se 
+                conectan directamente con el servidor de base de datos elegido.
+
+----------------------------------------------------------------------------------
+2.  Pasos previos a la instalación
+----------------------------------------------------------------------------------
+
+    Antes de instalar el servidor de aplicaciones es necesario configurar el sistema 
+    observando los siguientes pasos y recomendaciones.
+
+    
+2.1 Servidor de la aplicación
+    
+    Instalar el sistema operativo elegido (e.g., Windows 2000 Server). 
+
+       Para intalaciones de misión crítica Siempre es preferible empezar con una 
+       instalación completemente limpia.
+
+       No deberían emplearse configuracione preinstaladas del sistema operativo
+
+       Es mejor emplear directamente el comando F:\WIN2000\I386\winnt.exe desde
+       el CD de instalación de Windows 2000 Server que utilizar los programas
+       de instalación que en ocasiones vienen con la compra de los equipos.
+
+       Instalar los protocolos y servicios que permitan la configuración de TCP/IP
+       
+       Configurar Windows para idioma Español (México): es-mx
+    
+    Instalar los service packs y actualizaciones de seguridad
+
+       Obtener e instalar desde Internet todas las actualizaciones del sistema operativo 
+       como service packs, controladores, etc, liberados a la fecha de instalación. 
+       Hacer esto mediante el servicio Windows Update.
+
+       En CD:\Resources\Win2000 SP3 Express.exe se incluye un programa de instalación
+       rápido vía Internet del service pack 3.0 para Windows 2000.
+
+   
+       Obtener e instalar todas las actualizaciones de seguridad liberadas hasta la 
+       fecha de instalación.
+
+       Comprobar que Windows entra y sale sin problemas
+
+    Actualizar Microsoft Internet Explorer 
+    
+       Si se desea puede actualizar Internet Explorer a una versión superior a la 
+       incluida con su sistema operativo de servidor.
+
+       En CD:\Resources\Internet Explorer 5.5 Internet Setup.exe
+       se incluye un programa de instlación rápida vía Internet para IExplorer 5.5
+
+       
+    Instalación de seguridad
+    
+        Asegurar el acceso al servidor mediante una única cuenta de usuario y password.
+
+        Es importante modificar el password periódicamente para evitar accesos no autorizados
+        
+
+    Instalar los servicios de Internet Information Server: 
+    (Panel de control -> Agregar o quitar programas -> Componentes de Windows)
+
+        Asegurarse que se han elegido todas los elementos presentados en las opciones 
+        de instalación de IIS. 
+       
+        Al finalizar asegurarse que puede acceder a http://localhost/ en el servidor
+        y en alguno de los equipos cliente. Los equipos cliente acceden mediante 
+        http://192.15.201.173/ o la dirección IP asignada al servidor.	
+        Se deberá observar una página de introducción a IIS.
+
+    Instalar el run-time interpreter de Visual Basic 6.0
+
+    Instalar el service pack 3.0 de Visual Basic 6.0 (se recomienda SP 5.0)
+    se puede emplear CD:\Resources\Visual Basic 6 Service Pack 5.exe
+
+
+    Instalar Microsoft Data Access Components 2.7 que se encuentra en 
+    se puede emplear CD:\Resources\Microsoft Data Access Components 2.7.exe
+
+    Instalar Microsoft Office 2000 o superior
+
+
+2.2 Servidores de base de datos
+
+    Instalar Oracle8i Enterprise Edition Release 8.1.6 o superior en el equipo elegido, o bien
+    SQL Server 6.0 o superior
+       
+        
+        NOTA: Puede instalarse en el mismo servidor de aplicaciones 
+
+    Si el equipo servidor de base de datos es distinto al de la aplicación, estos deberán 
+    ser conectados mediante un acceso de red rápido, seguro y confiable.
+    
+----------------------------------------------------------------------------------
+3.   Instalación del Sistema Internet de Contabilidad Financiera
+----------------------------------------------------------------------------------
+
+3.1  Registro de componentes
+
+     Los componentes que conforman la aplicación y su entorno de ejecución se encuentran en:
+     CD:\Binaries\. 
+     
+     En dicho directorio se incluyen únicamente archivos dll y exe que deberán ser instalados
+     haciendo clic en el archivo: CD:\Binaries\instalar componentes.bat
+         
+        MUY IMPORTANTE: Antes de ejecutar el batch anterior deberán seguirse todos los pasos
+                        de instalación mencionados en la sección anterior
+                        (2. Pasos previos a la instalación)
+
+         
+     El código fuente de los componentes modificables del Sistema Internet de Contabilidad 
+     Financeria se encuentran en CD:\Sources\
+              
+     
+3.2  Registro de los parámetros de configuración
+
+     Los parámetros de configuración del sistema se instalan en el registro de Windows del
+     equipo servidor de aplicaciones haciendo clic en el archivo:
+     CD:\Data\sicofin-Banobras.reg
+
+     Al hacer clic y aceptar se introducen todos los parámetros de configuración
+     predeterminados en el regsitro de Windows en la sección 
+     HKEY_LOCAL_MACHINE\SOFTWARE\Ontica
+
+     Para entrar al registro de Windows basta con ejecutar regedit.exe desde la línea de 
+     comandos de Microsot Windows
+
+3.3  Instalación de la base de datos
+
+        Se incluyen todos los scripts de instalación para Oracle 8i en 
+        CD:\Data\Database scripts\run_scripts.sql
+
+        Puede ejecutarse el script dentro de SQL Plus de Oracle con el comando:
+        @CD:\Data\Database scripts\run_scripts.sql      
+
+       
+        Se incluye un respaldo de la base de datos en producción tal y como se encontraba 
+        en producción el 23 de abril del 2002 en el archivo
+        CD:\Data\Oracle 8.1.6 Production DB Backup\sicofin.dmp
+  
+        Por razones de seguridad, la instalación de dicho respaldo deberá efectuarse por alguno 
+        de los administradores de base de datos de Banobras, ya que aquí ni en ninguna parte 
+        de este disco aparece el usuario y password de acceso a la base de datos.
+
+        Para la instalación bajo SQL Server o Microsoft Access consulte a Ontica en 
+        http://www.ontica.com.mx/
+
+
+
+3.4  Instalación del sitio web Empiria.
+
+     Copiar el contenido de la carpeta CD:\WebSite\ al directorio del servidor de aplicaciones
+     donde se encuentran los sitios web de Internet Information Server
+
+     Típicamente en C:\Inetpub\wwwroot\
+
+     de tal suerte que después de la copia de archivos el directorio deberá verse así:
+
+     C:\Inetpub\wwwroot\empiria\ ....
+
+     Entrar a los servicios de Internet Information Server en 
+     Pánel de control -> Herramientas administrativas -> Servicios de Internet Information Server
+
+       Desde dicha herramienta abrir las propiedades del sitio ubicado en la carpeta
+       Web\Sitio Web predeterminado\empiria
+
+       Configurar lo siguiente:
+
+          Configuración de la aplicación: oprimir el botón Crear
+
+          Nombre de la aplicación : empiria
+          Permisos de ejecución   : Sólo secuencias de comandos
+          Protección de aplicación: Alta (aislada)
+
+     MUY IMPORTANTE: La configuración de las opciones de seguridad avanzadas de IIS las
+                     debe efectuar personal calificado para no comprometer la seguridad 
+                     de la aplicación.
+
+                     Para mayor información consulte a Ontica en http://www.ontica.com.mx/
+
+
+----------------------------------------------------------------------------------
+Para cualquier asunto relacionado con la instalación de el Sistema Internet de 
+Contabilidad Financiera consulte Ontica en Internet http://www.ontica.com.mx/
+----------------------------------------------------------------------------------
+
+*** Fin del documento de instalación "CD:\Notas de instalación.txt" ***

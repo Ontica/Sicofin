@@ -1,0 +1,208 @@
+/*************    Empiria® Report Designer    ***************/
+
+CREATE TABLE AODictionary
+(
+   ItemId			NUMBER(12) PRIMARY KEY , 
+   ItemType			CHAR(1) NOT NULL , 
+   ItemName			VARCHAR2(255) NOT NULL , 
+   ItemAlias			VARCHAR2(255) , 
+   ItemIsClassId		NUMBER(1) NOT NULL , 
+   ItemLinkedClassId		NUMBER(12) NOT NULL , 
+   ItemLinkedClassAttrId	NUMBER(12) NOT NULL , 
+   ItemIsHidden			NUMBER(1) NOT NULL , 
+   ItemDataType			CHAR(1) , 
+   ItemDataTypeLength		NUMBER(6) , 
+   ItemDataTypePrecision	NUMBER(6) , 
+   ItemDataTypeFormat		VARCHAR2(128) , 
+   ItemStringValue		VARCHAR2(2048) , 
+   ItemNumericValue		NUMBER , 
+   ItemDateValue   		DATE , 
+   ItemPosition  		NUMBER(12) NOT NULL , 
+   ItemParentId			NUMBER(12) NOT NULL , 
+   ItemAuthorId			NUMBER(12) NOT NULL 
+);
+
+CREATE TABLE AOReports
+(
+   ReportId			NUMBER(12) PRIMARY KEY , 
+   ReportName			VARCHAR2(128) NOT NULL , 
+   ReportDescription		VARCHAR2(512) , 
+   ReportKeywords		VARCHAR2(2048) , 
+   ReportCategoryId		NUMBER(12) NOT NULL , 
+   ReportDataClassId		NUMBER(12) NOT NULL , 
+   ReportDataSubClassId		NUMBER(12) NOT NULL , 
+   ReportDataOrderId		NUMBER(12) NOT NULL , 
+   ReportTechnology		CHAR(1) NOT NULL , 
+   ReportTemplateFile		VARCHAR2(128) , 
+   ReportHelpFile		VARCHAR2(128) , 
+   ReportIconFile		VARCHAR2(128) , 
+   ReportPrintLayout		VARCHAR2(2048) , 
+   AuthorId			NUMBER(12) NOT NULL , 
+   LastUpdate			DATE NOT NULL , 
+   ReportStatus			CHAR(1) NOT NULL , 
+   HistoricReportId		NUMBER(12) NOT NULL , 
+   FromDate			DATE NOT NULL , 
+   ToDate			DATE NOT NULL
+);
+
+CREATE TABLE AOReportSections
+(
+   SectionId			NUMBER(12) PRIMARY KEY , 
+   ReportId			NUMBER(12) NOT NULL , 
+   SectionType			CHAR(2) NOT NULL ,
+   SectionPosition		NUMBER(4) NOT NULL , 
+   SectionWorkSheet		VARCHAR2(36) , 
+   SectionName			VARCHAR2(255) NOT NULL , 
+   SectionShape			CHAR(1) NOT NULL , 
+   SectionRows			NUMBER(4) NOT NULL , 
+   SectionCols			NUMBER(4) NOT NULL , 
+   SectionInitialRow		NUMBER(4) NOT NULL , 
+   SectionInitialColumn		NUMBER(4) NOT NULL , 
+   SectionFinalColumn		NUMBER(4) NOT NULL , 
+   SectionDataGrouping		VARCHAR2(2048) ,
+   SectionDataOrder		VARCHAR2(2048) ,
+   SectionDataFilter		VARCHAR2(2048) , 
+   SectionPrintCondition	VARCHAR2(2048) ,
+   SectionPrintLayout		VARCHAR2(2048) 
+);
+
+CREATE TABLE AOReportItems
+(
+   ReportItemId			NUMBER(12) PRIMARY KEY , 
+   ReportId			NUMBER(12) NOT NULL , 
+   ItemName			VARCHAR2(255) NOT NULL , 
+   ItemType			CHAR(1) NOT NULL , 
+   ItemSectionId		NUMBER(12) NOT NULL , 
+   ItemWorkSheet		VARCHAR2(36) , 
+   ItemRow			NUMBER(4) NOT NULL , 
+   ItemColumn			NUMBER(4) NOT NULL , 
+   ItemLength			NUMBER(4) NOT NULL , 
+   ItemValue 			VARCHAR2(2048) , 
+   ItemTag			VARCHAR2(255) NOT NULL , 
+   ItemOperationId		NUMBER(12) NOT NULL , 
+   ItemFilter			VARCHAR2(1024) ,
+   ItemFilterDesc		VARCHAR2(1024) ,
+   ItemPrintCondition		VARCHAR2(2048) ,
+   ItemPrintLayout		VARCHAR2(2048) ,
+);
+
+
+CREATE PROCEDURE spDelReport(pReportId NUMBER) AS
+BEGIN
+   DELETE FROM MHParticipantObjects WHERE (entityId = 6); 
+   DELETE FROM AOReportItems WHERE (reportId = pReportId); 
+   DELETE FROM AOReportSections WHERE (reportId = pReportId); 
+   DELETE FROM AOReports WHERE (reportId = pReportId); 
+END;
+/
+
+CREATE PROCEDURE spDelReportItem(pItemId NUMBER) AS
+BEGIN
+   DELETE FROM AOReportItems WHERE (reportItemId = pItemId);
+   COMMIT;
+END;
+/
+
+CREATE PROCEDURE spDelReportRow(pRowId NUMBER) AS
+  nSectionId NUMBER;
+  nPosition NUMBER;
+BEGIN
+   SELECT itemRow INTO nPosition
+   FROM AOReportItems WHERE (reportItemId = pRowId);
+
+   SELECT itemSectionId INTO nSectionId 
+   FROM AOReportItems WHERE (reportItemId = pRowId);
+
+   IF nSectionId IS NULL THEN
+     return;
+   ELSE
+
+     DELETE FROM AOReportItems 
+     WHERE ((itemSectionId = nSectionId) AND (itemRow = nPosition));
+
+     UPDATE AOReportItems SET itemRow = itemRow - 1
+     WHERE ((itemSectionId = nSectionId) AND (itemType = 'R') AND (itemRow > nPosition));     
+
+     DELETE FROM AOReportItems WHERE (reportItemId = pRowId);
+     COMMIT;
+   END IF;
+
+EXCEPTION
+   WHEN NO_DATA_FOUND THEN
+     return;
+END;
+/
+
+CREATE PROCEDURE spDelReportSection(pSectionId NUMBER) AS
+  nReportId NUMBER;
+  nPosition NUMBER;
+  sWorkSheet VARCHAR2(36);
+BEGIN
+
+   SELECT reportId INTO nReportId 
+   FROM AOReportSections WHERE (sectionId = pSectionId);
+
+   IF nReportId IS NULL THEN
+     return;
+   END IF;
+
+   SELECT sectionPosition INTO nPosition
+   FROM AOReportSections WHERE (sectionId = pSectionId);
+
+   SELECT sectionWorksheet INTO sWorkSheet 
+   FROM AOReportSections WHERE (sectionId = pSectionId);
+
+   IF sWorkSheet IS NULL THEN
+     UPDATE AOReportSections SET sectionPosition = sectionPosition - 1
+     WHERE ((reportId = nReportId) AND (sectionShape = 'H') AND (sectionPosition > nPosition) AND (sectionWorkSheet IS NULL));     
+   ELSE
+     UPDATE AOReportSections SET sectionPosition = sectionPosition - 1
+     WHERE ((reportId = nReportId) AND (sectionShape = 'H') AND (sectionPosition > nPosition) AND (sectionWorkSheet = sWorkSheet));
+   END IF;
+
+   DELETE FROM AOReportItems
+   WHERE (itemSectionId = pSectionId);
+
+   DELETE FROM AOReportSections 
+   WHERE (sectionId = pSectionId);
+
+   COMMIT;
+
+EXCEPTION
+   WHEN NO_DATA_FOUND THEN
+     return;
+END;
+/
+
+
+/*******************    SECUENCIAS    ***************************/
+
+CREATE SEQUENCE SeqDictionaryItemId
+INCREMENT BY 1
+START WITH 1000
+NOCACHE;
+
+CREATE SEQUENCE SeqReportId
+INCREMENT BY 1
+START WITH 1
+NOCACHE;
+
+CREATE SEQUENCE SeqReportSectionId
+INCREMENT BY 1
+START WITH 1
+NOCACHE;
+
+CREATE SEQUENCE SeqReportItemId
+INCREMENT BY 1
+START WITH 1
+NOCACHE;
+
+DROP TABLE AOReports;
+DROP TABLE AOReportSections;
+DROP TABLE AOReportItems;
+DROP TABLE AODictionary;
+
+DROP SEQUENCE SeqReportId ;
+DROP SEQUENCE SeqReportSectionId ;
+DROP SEQUENCE SeqReportItemId ;
+DROP SEQUENCE SeqDictionaryItemId ;

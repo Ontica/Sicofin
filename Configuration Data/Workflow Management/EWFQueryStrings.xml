@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- Sistema: Empiria® Workflow Manager 1.0    	Documento: Database Query Strings    -->
+<!-- Fecha  : 19/Diciembre/2001       		Autor    : José Manuel Cota          -->
+<queries>
+  <query name="qryApplicationWithTaskId">
+    <source>
+      <![CDATA[ 
+	SELECT EWFApplications.* 
+	FROM EWFApplications, EWFTasks 
+	WHERE (EWFApplications.applicationId = EWFTasks.applicationId) AND (EWFTasks.taskId = %1)
+      ]]>
+    </source>
+  </query>
+  <query name="qryParticipants">
+    <source>
+      <![CDATA[ 
+	SELECT * FROM EWFParticipants <@WHERE@> <@ORDER_BY@>
+      ]]>
+    </source>
+    <default_where/>
+    <default_order>
+      participantName, participantKey
+    </default_order>
+  </query>
+  <query name="qryParticipant">
+    <source>
+      <![CDATA[ 
+	SELECT * FROM EWFParticipants WHERE (participantId = %1)
+      ]]>
+    </source>
+  </query>
+  <query name="qryPartTasksQuickBar">
+    <source>
+       <![CDATA[ 
+	SELECT EWFTaskBars.itemLabel, EWFTaskBars.presentationOrder, EWFTasks.taskId, 
+	       EWFTasks.taskShortName, EWFTasks.taskDescription, EWFParticipantTasks.participantId, 
+	       EWFApplications.appStatus 
+	FROM EWFTaskBars, EWFTasks, EWFParticipantTasks, EWFApplications
+	WHERE (EWFTasks.taskId = EWFParticipantTasks.taskId (+)) AND 
+		(EWFApplications.applicationId (+) = EWFTasks.applicationId) AND 
+		(EWFTaskBars.taskId  = EWFTasks.taskId (+)) AND 
+		(EWFParticipantTasks.participantId (+) = %1) AND
+		(EWFTaskBars.taskBarType = 'M') AND (EWFApplications.appStatus (+) = 'R') 
+		ORDER BY EWFTaskBars.presentationOrder
+      ]]>
+    </source>
+  </query>
+  <query name="qryPartToDoItemsCounters">
+    <source>
+      <![CDATA[ 
+	SELECT itemType, COUNT(*) counter
+	FROM MHInboxes
+	WHERE (toParticipantId = %1) OR (toParticipantId IN (
+			SELECT participantAId
+			FROM MHParticipantsRelations
+			WHERE (participantBId = %1) and (RelationTypeId = 1301)
+	    ))
+	GROUP BY itemType
+      ]]>
+    </source>
+  </query>
+</queries>

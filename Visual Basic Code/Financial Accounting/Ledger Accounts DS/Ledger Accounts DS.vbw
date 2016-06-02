@@ -1,0 +1,4 @@
+CServer = 35, 103, 1024, 679, C
+MMain = 175, 122, 1025, 761, C
+MDBItemsDef = 35, 103, 941, 679, CZ
+MDBMethodsLibrary = 35, 103, 482, 679, CZ

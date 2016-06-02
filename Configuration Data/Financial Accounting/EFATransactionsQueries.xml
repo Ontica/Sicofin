@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- Sistema: Empiria® Financial Accounting 1.0 	Documento: Transactions Query Strings  -->
+<!-- Fecha  : 31/Enero/2002       			Autor    : José Manuel Cota            -->
+<queries>
+	<query name="qryPendingTransactions">
+		<source>
+			<![CDATA[
+				SELECT id_transaccion, COF_Grupo_Mayor.id_grupo_mayor, nombre_grupo_mayor, COF_Mayor.id_mayor, numero_mayor, nombre_mayor,
+							 numero_transaccion, concepto_transaccion, fecha_afectacion, fecha_registro, id_elaborada_por, id_autorizada_por,
+							 MHParticipants.participantName elaborada_por, MHParticipants2.participantName autorizada_por,
+							 AO_Objects.Object_Name tipo_transaccion, AO_Objects_2.Object_Name tipo_poliza, esta_abierta
+				FROM COF_Transaccion, COF_Mayor, COF_Grupo_Mayor, COF_Elemento_Grupo_Mayor, 
+						 AO_Objects, AO_Objects AO_Objects_2, MHParticipants, MHParticipants MHParticipants2
+				WHERE (COF_Transaccion.id_mayor = COF_Mayor.id_mayor) AND 
+							(COF_Elemento_Grupo_Mayor.id_mayor = COF_Mayor.id_mayor) AND 
+						  (COF_Elemento_Grupo_Mayor.id_grupo_mayor = COF_Grupo_Mayor.id_grupo_mayor) AND 
+							(id_tipo_transaccion = AO_Objects.Object_Id) AND 
+							(id_tipo_poliza = AO_Objects_2.Object_Id) AND  
+							(id_elaborada_por = MHParticipants.participantId) AND 
+							(id_autorizada_por = MHParticipants2.participantId (+) ) AND 
+							(COF_Grupo_Mayor.clip_grupo_mayor = 2) AND (esta_abierta = 1)
+							<@SQL_WHERE@>
+				GROUP BY id_transaccion, COF_Grupo_Mayor.id_grupo_mayor, nombre_grupo_mayor, COF_Mayor.id_mayor, numero_mayor, nombre_mayor, 
+								 numero_transaccion, concepto_transaccion, fecha_afectacion, fecha_registro, id_elaborada_por, id_autorizada_por, 
+								 MHParticipants.participantName, MHParticipants2.participantName, AO_Objects.Object_Name, AO_Objects_2.Object_Name, esta_abierta
+				ORDER BY nombre_grupo_mayor, numero_mayor, nombre_mayor, <@SQL_ORDER_BY@>
+      ]]>
+    </source>
+  </query>
+  <query name="qryPendingTransactionsWithPostingsSum">
+    <source>
+      <![CDATA[
+				SELECT COF_Transaccion.id_transaccion, COF_Grupo_Mayor.id_grupo_mayor, nombre_grupo_mayor, COF_Mayor.id_mayor, numero_mayor, nombre_mayor,
+							 numero_transaccion, concepto_transaccion, fecha_afectacion, fecha_registro, id_elaborada_por, id_autorizada_por,
+							 MHParticipants.participantName elaborada_por, MHParticipants2.participantName autorizada_por,
+							 AO_Objects.Object_Name tipo_transaccion, AO_Objects_2.Object_Name tipo_poliza, esta_abierta,
+							 (SUM(DECODE(tipo_movimiento, 'D', monto, 0))) cargos, 
+							 (SUM(DECODE(tipo_movimiento, 'H', monto, 0))) abonos
+				FROM COF_Transaccion, COF_Movimiento_Tmp Postings, COF_Mayor, COF_Grupo_Mayor, COF_Elemento_Grupo_Mayor, 
+						 AO_Objects, AO_Objects AO_Objects_2, MHParticipants, MHParticipants MHParticipants2
+				WHERE (COF_Transaccion.id_transaccion = Postings.id_transaccion (+)) AND
+							(COF_Transaccion.id_mayor = COF_Mayor.id_mayor) AND 
+							(COF_Elemento_Grupo_Mayor.id_mayor = COF_Mayor.id_mayor) AND 
+						  (COF_Elemento_Grupo_Mayor.id_grupo_mayor = COF_Grupo_Mayor.id_grupo_mayor) AND 
+							(id_tipo_transaccion = AO_Objects.Object_Id) AND 
+							(id_tipo_poliza = AO_Objects_2.Object_Id) AND  
+							(id_elaborada_por = MHParticipants.participantId) AND 
+							(id_autorizada_por = MHParticipants2.participantId (+) ) AND 
+							(COF_Grupo_Mayor.clip_grupo_mayor = 2) AND (esta_abierta = 1)
+							<@SQL_WHERE@>
+				GROUP BY COF_Transaccion.id_transaccion, COF_Grupo_Mayor.id_grupo_mayor, nombre_grupo_mayor, COF_Mayor.id_mayor, numero_mayor, nombre_mayor, 
+								 numero_transaccion, concepto_transaccion, fecha_afectacion, fecha_registro, id_elaborada_por, id_autorizada_por, 
+								 MHParticipants.participantName, MHParticipants2.participantName, AO_Objects.Object_Name, AO_Objects_2.Object_Name, esta_abierta
+				ORDER BY nombre_grupo_mayor, numero_mayor, nombre_mayor, <@SQL_ORDER_BY@>
+      ]]>
+    </source>
+  </query>
+  <query name="qryPostedTransactions">
+    <source>
+      <![CDATA[
+				SELECT id_transaccion, COF_Grupo_Mayor.id_grupo_mayor, nombre_grupo_mayor, COF_Mayor.id_mayor, numero_mayor, nombre_mayor,
+							 numero_transaccion, concepto_transaccion, fecha_afectacion, fecha_registro, id_elaborada_por, id_autorizada_por,
+							 MHParticipants.participantName elaborada_por, MHParticipants2.participantName autorizada_por,
+							 AO_Objects.Object_Name tipo_transaccion, AO_Objects_2.Object_Name tipo_poliza, esta_abierta
+				FROM COF_Transaccion, COF_Mayor, COF_Grupo_Mayor, COF_Elemento_Grupo_Mayor, 
+						 AO_Objects, AO_Objects AO_Objects_2, MHParticipants, MHParticipants MHParticipants2
+				WHERE (COF_Transaccion.id_mayor = COF_Mayor.id_mayor) AND 
+							(COF_Elemento_Grupo_Mayor.id_mayor = COF_Mayor.id_mayor) AND 
+						  (COF_Elemento_Grupo_Mayor.id_grupo_mayor = COF_Grupo_Mayor.id_grupo_mayor) AND 
+							(id_tipo_transaccion = AO_Objects.Object_Id) AND 
+							(id_tipo_poliza = AO_Objects_2.Object_Id) AND  
+							(id_elaborada_por = MHParticipants.participantId) AND 
+							(id_autorizada_por = MHParticipants2.participantId) AND 
+							(COF_Grupo_Mayor.clip_grupo_mayor = 2) AND (esta_abierta = 0)
+							<@SQL_WHERE@>
+				GROUP BY id_transaccion, COF_Grupo_Mayor.id_grupo_mayor, nombre_grupo_mayor, COF_Mayor.id_mayor, numero_mayor, nombre_mayor, 
+								 numero_transaccion, concepto_transaccion, fecha_afectacion, fecha_registro, id_elaborada_por, id_autorizada_por, 
+								 MHParticipants.participantName, MHParticipants2.participantName, AO_Objects.Object_Name, AO_Objects_2.Object_Name, esta_abierta
+				ORDER BY nombre_grupo_mayor, numero_mayor, nombre_mayor, <@SQL_ORDER_BY@>
+      ]]>
+    </source>
+  </query>
+  <query name="qryPostedTransactionsWithPostingsSum">
+    <source>
+      <![CDATA[ 
+				SELECT COF_Transaccion.id_transaccion, COF_Grupo_Mayor.id_grupo_mayor, nombre_grupo_mayor, COF_Mayor.id_mayor, numero_mayor, nombre_mayor,
+							 numero_transaccion, concepto_transaccion, fecha_afectacion, fecha_registro, id_elaborada_por, id_autorizada_por,
+							 MHParticipants.participantName elaborada_por, MHParticipants2.participantName autorizada_por,
+							 AO_Objects.Object_Name tipo_transaccion, AO_Objects_2.Object_Name tipo_poliza, esta_abierta,
+							 (SUM(DECODE(tipo_movimiento, 'D', monto, 0))) cargos, 
+							 (SUM(DECODE(tipo_movimiento, 'H', monto, 0))) abonos
+				FROM COF_Transaccion, COF_Movimiento Postings, COF_Mayor, COF_Grupo_Mayor, COF_Elemento_Grupo_Mayor, 
+						 AO_Objects, AO_Objects AO_Objects_2, MHParticipants, MHParticipants MHParticipants2
+				WHERE (COF_Transaccion.id_transaccion = Postings.id_transaccion) AND
+							(COF_Transaccion.id_mayor = COF_Mayor.id_mayor) AND 
+							(COF_Elemento_Grupo_Mayor.id_mayor = COF_Mayor.id_mayor) AND 
+						  (COF_Elemento_Grupo_Mayor.id_grupo_mayor = COF_Grupo_Mayor.id_grupo_mayor) AND 
+							(id_tipo_transaccion = AO_Objects.Object_Id) AND 
+							(id_tipo_poliza = AO_Objects_2.Object_Id) AND  
+							(id_elaborada_por = MHParticipants.participantId) AND 
+							(id_autorizada_por = MHParticipants2.participantId) AND 
+							(COF_Grupo_Mayor.clip_grupo_mayor = 2)
+							<@SQL_WHERE@>
+				GROUP BY COF_Transaccion.id_transaccion, COF_Grupo_Mayor.id_grupo_mayor, nombre_grupo_mayor, COF_Mayor.id_mayor, numero_mayor, nombre_mayor, 
+								 numero_transaccion, concepto_transaccion, fecha_afectacion, fecha_registro, id_elaborada_por, id_autorizada_por, 
+								 MHParticipants.participantName, MHParticipants2.participantName, AO_Objects.Object_Name, AO_Objects_2.Object_Name, esta_abierta
+				ORDER BY nombre_grupo_mayor, numero_mayor, nombre_mayor, <@SQL_ORDER_BY@>
+      ]]>
+    </source>
+  </query>
+  <query name="qryPendingAndPostedTransactions">
+    <source>
+      <![CDATA[ 
+
+      ]]>
+    </source>
+  </query>
+</queries>

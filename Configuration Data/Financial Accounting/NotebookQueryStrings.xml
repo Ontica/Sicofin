@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- Sistema: Empiria® Financial Accounting 1.0 	Documento: Database Query Strings    -->
+<!-- Fecha  : 25/Diciembre/2001       			Autor    : José Manuel Cota          -->
+<queries>
+  <query name="qryBeforePeriodBalances">
+    <source>
+      <![CDATA[ 
+        SELECT <@GRAL_LEDGERS_CONS@>A.id_moneda, A.id_cuenta, A.id_sector<@GET_SUBS_ACCTS@>,
+               (DECODE(naturaleza, 'D', (SUM(saldo_inicial) + SUM(cargos) - SUM(abonos)),
+               (SUM(saldo_inicial) - SUM(cargos) + SUM(abonos)))) saldo_inicial, (0) cargos, (0) abonos
+        FROM ((<@INITIAL_BALANCES@>) UNION (<@INITIAL_POSTINGS@>)) A, COF_Cuenta B, (<@STD_ACCOUNTS@>) C
+        WHERE (A.id_cuenta = B.id_cuenta) AND (B.id_cuenta_estandar = C.id_cuenta_estandar)
+        GROUP BY <@GRAL_LEDGERS_CONS@>A.id_moneda, naturaleza, A.id_cuenta, A.id_sector<@GET_SUBS_ACCTS@>
+      ]]>
+    </source>
+  </query>
+  <query name="qryBeforePeriodPostings">
+    <source>
+      <![CDATA[ 
+    	SELECT <@GRAL_LEDGERS_CONS@>id_moneda, id_cuenta, id_sector<@GET_SUBS_ACCTS@>, 
+               (0) saldo_inicial, (SUM(DECODE(tipo_movimiento, 'D', monto , 0))) cargos,
+               (SUM(DECODE(tipo_movimiento, 'H', monto, 0))) abonos
+    	FROM COF_Transaccion, COF_Movimiento
+        WHERE (<@GRAL_LEDGERS_FILTER@>) AND (fecha_afectacion <= '<@FROM_DATE@>') AND
+              (COF_Transaccion.id_transaccion = COF_Movimiento.id_transaccion)
+        GROUP BY <@GRAL_LEDGERS_CONS@>id_moneda, id_cuenta, id_sector<@GET_SUBS_ACCTS@>
+      ]]>
+    </source>
+  </query>
+  <query name="qryInitialBalances">
+    <source>
+      <![CDATA[ 
+    	SELECT <@GRAL_LEDGERS_CONS@>id_moneda, id_cuenta, id_sector<@GET_SUBS_ACCTS@>,
+    		SUM(saldo_inicial) saldo_inicial, (0) cargos, (0) abonos
+    	FROM COF_Saldo_Inicial
+    	WHERE (<@GRAL_LEDGERS_FILTER@>) AND (fecha_saldo_inicial <= '<@TO_DATE@>')
+        GROUP BY <@GRAL_LEDGERS_CONS@>id_moneda, id_cuenta, id_sector<@GET_SUBS_ACCTS@>
+      ]]>
+    </source>
+  </query>
+  <query name="qryInPeriodBalances">
+    <source>
+      <![CDATA[ 
+        SELECT <@GRAL_LEDGERS_CONS@>id_moneda, id_cuenta, id_sector<@GET_SUBS_ACCTS@>,
+        	(0) saldo_inicial, (SUM(DECODE(tipo_movimiento, 'D', monto, 0))) cargos,
+          	(SUM(DECODE(tipo_movimiento, 'H', monto, 0))) abonos
+    	FROM COF_Transaccion, COF_Movimiento
+    	WHERE (<@GRAL_LEDGERS_FILTER@>) AND
+              (fecha_afectacion >= '<@FROM_DATE@>') AND (fecha_afectacion <= '<@TO_DATE@>') AND
+              (COF_Movimiento.id_transaccion = COF_Transaccion.id_transaccion)<@TRANSACTIONS_FILTER@>
+    	GROUP BY <@GRAL_LEDGERS_CONS@>id_moneda, id_cuenta, id_sector<@GET_SUBS_ACCTS@>
+      ]]>
+    </source>
+  </query>
+  <query name="qryLastLevelsBalances">
+    <source>
+      <![CDATA[ 
+    	SELECT  <@GRAL_LEDGERS@>, id_moneda, numero_cuenta_estandar, id_sector, <@SUBS_ACCTS@>,
+        	SUM(saldo_inicial) saldo_inicial, SUM(cargos) cargos, SUM(abonos) abonos,
+         	(DECODE(naturaleza, 'D', (SUM(saldo_inicial) + SUM(cargos) - SUM(abonos)),
+         	(SUM(saldo_inicial) - SUM(cargos) + SUM(abonos)) )) saldo_actual,
+         	(DECODE(naturaleza, 'D', (SUM(saldo_inicial) + SUM(cargos) - SUM(abonos)),
+         	(SUM(saldo_inicial) - SUM(cargos) + SUM(abonos)) )) saldo_nv
+    	FROM ((<@BEFORE_PERIOD_BAL@>) UNION (<@IN_PERIOD_BAL@>)) A, COF_Cuenta B, (<@STD_ACCOUNTS@>) C <@SUBS_ACCTS_TABLE@>
+    	WHERE (A.id_cuenta = B.id_cuenta) AND (B.id_cuenta_estandar = C.id_cuenta_estandar)<@SOURCE_FILTER@> <@SUBS_ACCTS_JOIN@>
+	GROUP BY <@GRAL_LEDGERS_CONS@>id_moneda, numero_cuenta_estandar, naturaleza, id_sector<@GET_SUBS_ACCTS@>
+      ]]>
+    </source>
+  </query>
+  <query name="qryStdAccountsHist">
+    <source>
+      <![CDATA[ 
+	SELECT MAX(id_cuenta_estandar_hist) id_cuenta_estandar_hist, id_cuenta_estandar,
+	       numero_cuenta_estandar, naturaleza, id_tipo_cuenta
+	FROM COF_Cuenta_Estandar_Hist
+	WHERE <@STD_ACCOUNTS_FILTER@> AND
+	      (TRUNC(TO_DATE(fecha_inicio)) <= '<@TO_DATE@>') AND (TRUNC(TO_DATE(fecha_fin)) >= '<@FROM_DATE@>')
+    	GROUP BY id_cuenta_estandar, numero_cuenta_estandar, naturaleza, id_tipo_cuenta
+      ]]>
+    </source>
+  </query>
+  <query name="qryValorizateToSourceCurrency">
+    <source>
+      <![CDATA[ 
+	SELECT id_mayor, id_moneda, numero_cuenta_estandar, id_sector,
+	       id_cuenta_auxiliar, numero_cuenta_auxiliar, nombre_cuenta_auxiliar,
+	       (NVL(exchange_rate, 1) * saldo_inicial) saldo_inicial,
+	       (NVL(exchange_rate, 1) * cargos) cargos, (NVL(exchange_rate, 1) * abonos) abonos,
+	       (NVL(exchange_rate, 1) * saldo_actual) saldo_actual, saldo_nv
+	FROM (<@BALANCES_TABLE@>) A, AO_Exchange_Rates B
+	WHERE (B.exchange_rate_type_id = <@EXC_RATE_TYPE@>) AND
+	      (from_date = '<@EXC_RATE_DATE@>') AND (B.from_currency_id = <@FROM_CURRENCY@>) AND (A.id_moneda = B.to_currency_id)
+      ]]>
+    </source>
+  </query>
+  <query name="qryValorizateToTargetCurrency">
+    <source>
+      <![CDATA[ 
+    	SELECT id_mayor, id_moneda, numero_cuenta_estandar, id_sector,
+               id_cuenta_auxiliar, numero_cuenta_auxiliar, nombre_cuenta_auxiliar,
+	       (saldo_inicial / NVL(exchange_rate, 1)) saldo_inicial,
+	       (cargos / NVL(exchange_rate, 1)) cargos, (abonos / NVL(exchange_rate, 1)) abonos,
+               (saldo_actual / NVL(exchange_rate, 1)) saldo_actual, saldo_nv
+    	FROM (<@VALORIZATED_TABLE@>) A, AO_Exchange_Rates B
+	WHERE (B.exchange_rate_type_id = <@EXC_RATE_TYPE@>) AND
+	      (from_date = '<@EXC_RATE_DATE@>') AND (B.to_currency_id = <@TO_CURRENCY@>) AND (A.id_moneda = B.to_currency_id)
+      ]]>
+    </source>
+  </query>
+  <query name="qryAllLevelsFromTempTable1">
+    <source>
+      <![CDATA[ 
+	SELECT <@GRAL_LEDGERS@>, id_moneda, numero_cuenta_estandar, id_sector,
+		id_cuenta_auxiliar, numero_cuenta_auxiliar, nombre_cuenta_auxiliar,
+		SUM(saldo_inicial) saldo_inicial, SUM(cargos) cargos, SUM(abonos) abonos,
+		SUM(saldo_actual) saldo_actual, SUM(saldo_nv) saldo_nv
+	FROM (<@SUBQUERY@>)
+	GROUP BY <@GRAL_LEDGERS_CONS@>id_moneda, numero_cuenta_estandar, id_sector,
+              	 id_cuenta_auxiliar, numero_cuenta_auxiliar, nombre_cuenta_auxiliar
+      ]]>
+    </source>
+  </query>
+  <query name="qryAllLevelsFromTempTable2">
+    <source>
+      <![CDATA[ 
+    	(SELECT <@GRAL_LEDGERS@>, id_moneda, SUBSTR(numero_cuenta_estandar,1,4) numero_cuenta_estandar,
+		(0) id_sector, (0) id_cuenta_auxiliar, ('') numero_cuenta_auxiliar, ('') nombre_cuenta_auxiliar,
+		SUM(saldo_inicial) saldo_inicial, SUM(cargos) cargos, SUM(abonos) abonos,
+		SUM(saldo_actual) saldo_actual, SUM(saldo_nv) saldo_nv
+	 FROM <@TEMP_TABLE@>
+	 WHERE (id_sector <> 0)
+	 GROUP BY <@GRAL_LEDGERS_CONS@>id_moneda, SUBSTR(numero_cuenta_estandar,1, 4) )
+	 UNION
+      ]]>
+    </source>
+  </query>
+  <query name="qryAllLevelsFromTempTable3">
+    <source>
+      <![CDATA[ 
+	(SELECT <@GRAL_LEDGERS@>, id_moneda, SUBSTR(numero_cuenta_estandar, 1, <@POS@>) numero_cuenta_estandar,
+		id_sector, (0) id_cuenta_auxiliar, ('') numero_cuenta_auxiliar, ('') nombre_cuenta_auxiliar,
+		SUM(saldo_inicial) saldo_inicial, SUM(cargos) cargos, SUM(abonos) abonos,
+		SUM(saldo_actual) saldo_actual, SUM(saldo_nv) saldo_nv
+	 FROM <@TEMP_TABLE@>
+	 WHERE (LENGTH(numero_cuenta_estandar) >= <@POS@>) AND
+	       (SUBSTR(numero_cuenta_estandar, 1, <@POS@>) <> numero_cuenta_estandar) AND
+	       NOT ((SUBSTR(numero_cuenta_estandar, 1, <@POS@>) = numero_cuenta_estandar) AND (id_cuenta_auxiliar = 0))
+    	 GROUP BY <@GRAL_LEDGERS_CONS@>id_moneda, SUBSTR(numero_cuenta_estandar, 1, <@POS@>), id_sector )
+    	 UNION
+      ]]>
+    </source>
+  </query>
+  <query name="qryLastLevelsFromTempTable">
+    <source>
+      <![CDATA[ 
+	SELECT <@GRAL_LEDGERS@>, id_moneda, numero_cuenta_estandar, id_sector, <@SUBS_ACCTS@>,
+		SUM(saldo_inicial) saldo_inicial, SUM(cargos) cargos, SUM(abonos) abonos,
+		SUM(saldo_actual) saldo_actual, SUM(saldo_nv) saldo_nv
+	FROM <@TEMP_TABLE@>
+	GROUP BY <@GRAL_LEDGERS_CONS@>id_moneda, numero_cuenta_estandar, id_sector<@GET_SUBS_ACCTS@>
+      ]]>
+    </source>
+  </query>
+  <query name="qryOutputBalances">
+    <source>
+      <![CDATA[ 
+	SELECT A.id_mayor, A.id_moneda, o_id_moneda clave_moneda, currency_name nombre_moneda, naturaleza,
+	       id_tipo_cuenta, rol_cuenta, id_cuenta_estandar, A.numero_cuenta_estandar, nombre_cuenta_estandar nombre_cuenta,
+               A.id_sector, NVL(clave_sector, '00') clave_sector,
+	       A.id_cuenta_auxiliar, A.numero_cuenta_auxiliar, A.nombre_cuenta_auxiliar,
+	       saldo_inicial, cargos, abonos, saldo_actual,
+	       (DECODE(naturaleza, 'D', (cargos - abonos), (abonos - cargos))) movimientos,
+	       saldo_nv saldo_no_valorizado
+	FROM ( <@BALANCES_SQL@> ) A, ( <@STD_ACCTS_COMPLETE@> ) B, COF_Sector C, AO_Currencies D
+	WHERE (A.numero_cuenta_estandar = B.numero_cuenta_estandar) AND
+	      (A.id_sector = C.id_sector(+)) AND (A.id_moneda = D.currency_id) <@BALANCES_FILTER@> 
+        ORDER BY A.id_mayor, o_id_moneda, naturaleza DESC, A.numero_cuenta_estandar, clave_sector
+      ]]>
+    </source>
+  </query>
+  <query name="qryStdAccountHistComplete">
+    <source>
+      <![CDATA[ 
+	SELECT MAX(id_cuenta_estandar) id_cuenta_estandar_hist, id_cuenta_estandar, numero_cuenta_estandar, 
+	       MAX(nombre_cuenta_estandar) nombre_cuenta_estandar, MAX(naturaleza) naturaleza,
+	       MAX(id_tipo_cuenta) id_tipo_cuenta, MAX(rol_cuenta) rol_cuenta
+	FROM COF_Cuenta_Estandar_Hist
+	WHERE (<@STD_ACCOUNTS_FILTER@>) AND
+	      (TRUNC(TO_DATE(fecha_inicio)) <= '<@TO_DATE@>') AND (TRUNC(TO_DATE(fecha_fin)) >= '<@FROM_DATE@>')
+	GROUP BY id_cuenta_estandar, numero_cuenta_estandar
+      ]]>
+    </source>
+  </query>
+  <query name="qryAvgLastLevelsBalances">
+    <source>
+      <![CDATA[ 
+    	SELECT  fecha_saldo, <@GRAL_LEDGERS@>, id_moneda, numero_cuenta_estandar, id_sector, <@SUBS_ACCTS@>,
+        	SUM(saldo_inicial) saldo_inicial, SUM(cargos) cargos, SUM(abonos) abonos,
+         	(DECODE(naturaleza, 'D', (SUM(saldo_inicial) + SUM(cargos) - SUM(abonos)),
+         	(SUM(saldo_inicial) - SUM(cargos) + SUM(abonos)) )) saldo_actual,
+         	(DECODE(naturaleza, 'D', (SUM(saldo_inicial) + SUM(cargos) - SUM(abonos)),
+         	(SUM(saldo_inicial) - SUM(cargos) + SUM(abonos)) )) saldo_nv, (0) saldo_promedio, (0) saldo_promedio_nv
+    	FROM ((<@BEFORE_PERIOD_BAL@>) UNION (<@IN_PERIOD_BAL@>)) A, COF_Cuenta B, (<@STD_ACCOUNTS@>) C <@SUBS_ACCTS_TABLE@>
+    	WHERE (A.id_cuenta = B.id_cuenta) AND (B.id_cuenta_estandar = C.id_cuenta_estandar)<@SOURCE_FILTER@> <@SUBS_ACCTS_JOIN@>
+	GROUP BY fecha_saldo, <@GRAL_LEDGERS_CONS@>id_moneda, numero_cuenta_estandar, naturaleza, id_sector<@GET_SUBS_ACCTS@>
+      ]]>
+    </source>
+  </query>
+  <query name="qryAvgBeforePeriodBalances">
+    <source>
+      <![CDATA[ 
+        SELECT ('<@DATE@>') fecha_saldo, <@GRAL_LEDGERS_CONS@>A.id_moneda, A.id_cuenta, A.id_sector<@GET_SUBS_ACCTS@>,
+               (DECODE(naturaleza, 'D', (SUM(saldo_inicial) + SUM(cargos) - SUM(abonos)),
+               (SUM(saldo_inicial) - SUM(cargos) + SUM(abonos)))) saldo_inicial, (0) cargos, (0) abonos
+        FROM ((<@INITIAL_BALANCES@>) UNION (<@INITIAL_POSTINGS@>)) A, COF_Cuenta B, (<@STD_ACCOUNTS@>) C
+        WHERE (A.id_cuenta = B.id_cuenta) AND (B.id_cuenta_estandar = C.id_cuenta_estandar)
+        GROUP BY <@GRAL_LEDGERS_CONS@>A.id_moneda, naturaleza, A.id_cuenta, A.id_sector<@GET_SUBS_ACCTS@>
+      ]]>
+    </source>
+  </query>
+  <query name="qryAvgInPeriodBalances">
+    <source>
+      <![CDATA[ 
+        SELECT ('<@DATE@>') fecha_saldo, <@GRAL_LEDGERS_CONS@>id_moneda, id_cuenta, id_sector<@GET_SUBS_ACCTS@>,
+        	(0) saldo_inicial, (SUM(DECODE(tipo_movimiento, 'D', monto, 0))) cargos,
+          	(SUM(DECODE(tipo_movimiento, 'H', monto, 0))) abonos
+    	FROM COF_Transaccion, COF_Movimiento
+    	WHERE (<@GRAL_LEDGERS_FILTER@>) AND
+              (fecha_afectacion >= '<@FROM_DATE@>') AND (fecha_afectacion <= '<@TO_DATE@>') AND
+              (COF_Movimiento.id_transaccion = COF_Transaccion.id_transaccion)<@TRANSACTIONS_FILTER@>
+    	GROUP BY <@GRAL_LEDGERS_CONS@>id_moneda, id_cuenta, id_sector<@GET_SUBS_ACCTS@>
+      ]]>
+    </source>
+  </query>
+  <query name="qryAvgValorizateToSourceCurrency">
+    <source>
+      <![CDATA[ 
+	SELECT id_mayor, id_moneda, numero_cuenta_estandar, id_sector,
+	       id_cuenta_auxiliar, numero_cuenta_auxiliar, nombre_cuenta_auxiliar,
+	       (NVL(exchange_rate, 1) * saldo_inicial) saldo_inicial,
+	       (NVL(exchange_rate, 1) * cargos) cargos, (NVL(exchange_rate, 1) * abonos) abonos,
+	       (NVL(exchange_rate, 1) * saldo_actual) saldo_actual, saldo_nv
+	FROM (<@BALANCES_TABLE@>) A, AO_Exchange_Rates B
+	WHERE (B.exchange_rate_type_id = <@EXC_RATE_TYPE@>) AND
+	      (from_date = '<@EXC_RATE_DATE@>') AND (B.from_currency_id = <@FROM_CURRENCY@>) AND (A.id_moneda = B.to_currency_id)
+      ]]>
+    </source>
+  </query>
+  <query name="qryAvgValorizateToTargetCurrency">
+    <source>
+      <![CDATA[ 
+    	SELECT id_mayor, id_moneda, numero_cuenta_estandar, id_sector,
+               id_cuenta_auxiliar, numero_cuenta_auxiliar, nombre_cuenta_auxiliar,
+	       (saldo_inicial / NVL(exchange_rate, 1)) saldo_inicial,
+	       (cargos / NVL(exchange_rate, 1)) cargos, (abonos / NVL(exchange_rate, 1)) abonos,
+               (saldo_actual / NVL(exchange_rate, 1)) saldo_actual, saldo_nv
+    	FROM (<@VALORIZATED_TABLE@>) A, AO_Exchange_Rates B
+	WHERE (B.exchange_rate_type_id = <@EXC_RATE_TYPE@>) AND
+	      (from_date = '<@EXC_RATE_DATE@>') AND (B.to_currency_id = <@TO_CURRENCY@>) AND (A.id_moneda = B.to_currency_id)
+      ]]>
+    </source>
+  </query>
+  <query name="qryAvgLastLevelsFromTempTable">
+    <source>
+      <![CDATA[ 
+	SELECT <@GRAL_LEDGERS@>, id_moneda, numero_cuenta_estandar, id_sector, <@SUBS_ACCTS@>,
+		SUM(saldo_inicial) saldo_inicial, SUM(cargos) cargos, SUM(abonos) abonos,
+		SUM(saldo_actual) saldo_actual, SUM(saldo_nv) saldo_nv
+	FROM <@TEMP_TABLE@>
+	GROUP BY <@GRAL_LEDGERS_CONS@>id_moneda, numero_cuenta_estandar, id_sector<@GET_SUBS_ACCTS@>
+      ]]>
+    </source>
+  </query>
+  <query name="qryAvgAllLevelsFromTempTable1">
+    <source>
+      <![CDATA[ 
+	SELECT <@GRAL_LEDGERS@>, id_moneda, numero_cuenta_estandar, id_sector,
+		id_cuenta_auxiliar, numero_cuenta_auxiliar, nombre_cuenta_auxiliar,
+		SUM(saldo_inicial) saldo_inicial, SUM(cargos) cargos, SUM(abonos) abonos,
+		SUM(saldo_actual) saldo_actual, SUM(saldo_nv) saldo_nv
+	FROM (<@SUBQUERY@>)
+	GROUP BY <@GRAL_LEDGERS_CONS@>id_moneda, numero_cuenta_estandar, id_sector,
+              	 id_cuenta_auxiliar, numero_cuenta_auxiliar, nombre_cuenta_auxiliar
+      ]]>
+    </source>
+  </query>
+  <query name="qryAvgAllLevelsFromTempTable2">
+    <source>
+      <![CDATA[ 
+    	(SELECT <@GRAL_LEDGERS@>, id_moneda, SUBSTR(numero_cuenta_estandar,1,4) numero_cuenta_estandar,
+		(0) id_sector, (0) id_cuenta_auxiliar, ('') numero_cuenta_auxiliar, ('') nombre_cuenta_auxiliar,
+		SUM(saldo_inicial) saldo_inicial, SUM(cargos) cargos, SUM(abonos) abonos,
+		SUM(saldo_actual) saldo_actual, SUM(saldo_nv) saldo_nv
+	 FROM <@TEMP_TABLE@>
+	 WHERE (id_sector <> 0)
+	 GROUP BY <@GRAL_LEDGERS_CONS@>id_moneda, SUBSTR(numero_cuenta_estandar,1, 4) )
+	 UNION
+      ]]>
+    </source>
+  </query>
+  <query name="qryAvgAllLevelsFromTempTable3">
+    <source>
+      <![CDATA[ 
+	(SELECT <@GRAL_LEDGERS@>, id_moneda, SUBSTR(numero_cuenta_estandar, 1, <@POS@>) numero_cuenta_estandar,
+		id_sector, (0) id_cuenta_auxiliar, ('') numero_cuenta_auxiliar, ('') nombre_cuenta_auxiliar,
+		SUM(saldo_inicial) saldo_inicial, SUM(cargos) cargos, SUM(abonos) abonos,
+		SUM(saldo_actual) saldo_actual, SUM(saldo_nv) saldo_nv
+	 FROM <@TEMP_TABLE@>
+	 WHERE (LENGTH(numero_cuenta_estandar) >= <@POS@>) AND
+	       (SUBSTR(numero_cuenta_estandar, 1, <@POS@>) <> numero_cuenta_estandar) AND
+	       NOT ((SUBSTR(numero_cuenta_estandar, 1, <@POS@>) = numero_cuenta_estandar) AND (id_cuenta_auxiliar = 0))
+    	 GROUP BY <@GRAL_LEDGERS_CONS@>id_moneda, SUBSTR(numero_cuenta_estandar, 1, <@POS@>), id_sector )
+    	 UNION
+      ]]>
+    </source>
+  </query>
+  <query name="qryAvgOutputBalances">
+    <source>
+      <![CDATA[ 
+	SELECT A.id_mayor, A.id_moneda, o_id_moneda clave_moneda, currency_name nombre_moneda, naturaleza,
+	       id_tipo_cuenta, rol_cuenta, A.numero_cuenta_estandar, nombre_cuenta_estandar nombre_cuenta,
+               A.id_sector, NVL(clave_sector, '00') clave_sector,
+	       A.id_cuenta_auxiliar, A.numero_cuenta_auxiliar, A.nombre_cuenta_auxiliar,
+	       saldo_inicial, cargos, abonos, saldo_actual,
+	       (DECODE(naturaleza, 'D', (cargos - abonos), (abonos - cargos))) movimientos,
+	       saldo_nv saldo_no_valorizado
+	FROM ( <@BALANCES_SQL@> ) A, ( <@STD_ACCTS_COMPLETE@> ) B, COF_Sector C, AO_Currencies D
+	WHERE (A.numero_cuenta_estandar = B.numero_cuenta_estandar) AND
+	      (A.id_sector = C.id_sector(+)) AND (A.id_moneda = D.currency_id) <@BALANCES_FILTER@> 
+        ORDER BY A.id_mayor, o_id_moneda, naturaleza DESC, A.numero_cuenta_estandar, clave_sector
+      ]]>
+    </source>
+  </query>
+</queries>

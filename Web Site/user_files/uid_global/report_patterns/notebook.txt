@@ -1,0 +1,59 @@
+01;Estado de contabilidad al <@TO_DATE@>;    ;
+02;Estado de resultados <@FROM_TO_DATE@>;    ;
+03;Balanza de comprobación diaria al <@TO_DATE@>;    ;
+04;Balanza analítica de saldos mensuales;    ;
+05;Resumen de resultados;    ;
+06;Relación analítica de cuentas de resultados con saldos acumulados;    ;7026
+07;Caja;1101;7002
+08;Bancos;1103;7002;7001
+09;Relación de responsabilidades;    ;7006;
+10;Préstamos para la vivienda;1310;7002;7007
+11;Créditos personales al consumo;1312;7002;7011
+12;Cartera vencida;1314;7002
+13;Int. Devengados / préstamos y créditos vigentes;1319;7002;7013
+14;Intereses vencidos;1320;7002;7010
+15;Créditos reestructurados;1323;7002;7010
+16;Gobierno Federal Desc. p/cred vigentes;1337;7002
+17;Préstamos con fideicomiso de garantía;1350;7021
+18;Matriz y sucursales;1503;7002
+19;Otros deudores;1505;7002;7010
+20;Bienes muebles y valores adjudicados;1601;7002;7014
+21;Inmuebles adjudicados;1602;7002;7014
+22;Préstamos al personal de la institución;1606;7002;7010
+23;Mobiliario y equipo y 3103 depreciación acumulada mobiliaria y equipo;1801;7002;7011;7016
+24;Reval. de inmobiliario y equipo circular 1803;7002;7011
+25;Gastos de instalación y 3107 depreciación acumulada de gastos de instalación;1902;7002;7000
+26;Cheques de caja;2301;7002;7010
+27;Acreedores diversos;2311;7002;7010
+28;Provisión para obligaciones;2501;7002;7011
+29;Provisiones para obligaciones diversas;2503;7002;7011
+30;Provisiones prev. p/cd. d/riesgo crediticio;2505;7002
+31;Remuneraciones al personal;5105;7002
+32;Prestaciones al personal;5106;7002;7024
+33;Honorarios pagados;5108;7002;7024
+34;Rentas pagadas;5109;7002;7024
+35;Gastos de promoción;5110;7002;7024
+36;Otros gastos de operación y administración;5111;7002;7014
+37;Comisiones pagadas;5112;7002;7014
+38;Impuestos diversos;5113;7002;7014
+39;Depreciaciones y amortizaciones;5115;7002;7011
+40;Quebrantos diversos;5116;7002;7014
+41;Conc. no deducibles para ISR;5117;7002;7014
+42;Afect. p/const. prov. glob. cartera crediticia;5125;7002
+43;Intereses cobrados;5201;7002;7011
+44;Comisiones cobradas;5202;7002;7010
+45;Otras comisiones y premios cobrados;5204;7002;7011
+46;Otros productos y beneficios;5206;7002;7014
+47;Valores en custodia;6201;7002;7014
+48;Valores en garantía;6202;7002;7014
+49;Créditos renovados;6304;7002;7014
+50;Créditos incobrables;6305;7002;7028
+51;Cred. inc. aplic. contr. prov. pre. gl.;6307;7002;7011
+52;Control de vencimientos de cartera cred.;6316;7002
+53;Iva reg. por entidades federativas;6319;7002;7011
+54;Adeudos a cargo del sector público;6370;7002;7011
+55;Incremento de ad. sector público ej. curs.;6371;7002;7011;7014
+56;Clasificación por grado de riesgo cart.;6376;7002;7011
+57;Ints. vencidos con afect. a result. pend.;6378;7002;7011;7014
+58;Conceptos div. no especificados;6390;7002;7011
+59;Plantilla de personal;    ;

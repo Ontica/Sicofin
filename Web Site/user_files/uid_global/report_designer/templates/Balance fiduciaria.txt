@@ -1,0 +1,97 @@
+1
+2
+3
+4
+5					ENCABEZADO EN 12
+6
+7
+8
+9                                            <@RS_58@>
+0                                            <@RS_59@>
+1
+2                                            ESTADO DE POSICION FINANCIERA AL <@RS_60@>
+3Espacio
+4                                             A C T I V O
+5                           CAJA Y BANCOS                                                                                       $                <@RS_1@>
+6                           VALORES GUBERNAMENTALES                                                 $                 <@RS_2@>
+7                           VALORES DE RENTA FIJA                                                                     <@RS_3@>
+8                           ACCIONES                                                                                  <@RS_4@>                   <@RS_5@>
+9                                                                                                      -----------------------
+20                          PRESTAMOS CON FIDEICOMISO DE GARANTIA                                   $                 <@RS_6@>
+21                          PRESTAMOS CON GARANTIA INMOBILIARIA                                                       <@RS_7@>
+22                          PRESTAMOS CON GARANTIA DE PARTICIPACIONES                                                 <@RS_8@>
+23                          CREDITOS REESTRUCTURADOS VIGENTES                                                         <@RS_9@>                  <@RS_10@>
+24                                                                                                    -----------------------
+25                          PRESTAMOS DIRECTOS Y PRENDARIOS                                                                                     <@RS_11@>
+26                          CARTERA VENCIDA                                                         $                <@RS_12@>
+27                          RESERVA PARA CREDITOS MALOS O DUDOSOS                                                    <@RS_13@>                  <@RS_14@>
+28                                                                                                     -----------------------
+29                          CLIENTES Y CUENTAS POR COBRAR                                           $                <@RS_15@>
+30                          RESERVA PARA CLIENTES Y CUENTAS POR COBRAR                                               <@RS_16@>                  <@RS_17@>
+31                                                                                                     -----------------------
+32                          DEUDORES DIVERSOS                                                       $                <@RS_18@>
+33                          RESERVA PARA OTROS ADEUDOS                                                               <@RS_19@>                  <@RS_20@>
+34                                                                                                     -----------------------
+35                          INVENTARIOS INMOBILIARIOS                                                                                           <@RS_21@>
+36                          INVS P/CONSTRUCC DE VIVDA Y OBRAS DE INFRAESTRUCT.                                                                  <@RS_22@>
+37                          MOBILIARIO Y EQUIPO NETO DE DEPRECIACION                                                                            <@RS_23@>
+38                          OTRAS INVERSIONES, BIENES Y DERECHOS                                                                                <@RS_24@>
+39                          INMUEBLES NETO DE DEPRECIACION                                                                                      <@RS_25@>
+40                          CARGOS DIFERIDOS NETO DE DEPRECIACION                                                                               <@RS_26@>
+41                                                                                                                                ----------------------
+42                                        T O T A L  A C T I V O                                                                $               <@RS_27@>
+43                                                                                                                                ======================
+44
+45
+46                                                                     P A S I V O   Y   P A T R I M O N I O
+47                                             P A S I V O
+48                          CUENTAS Y DOCUMENTOS POR PAGAR                                          $                <@RS_28@>
+49                          PRESTAMOS DE BANCOS A CORTO PLAZO                                                        <@RS_29@>  $               <@RS_30@>
+50                                                                                                    -----------------------
+51                          OBLIGACIONES A CORTO PLAZO                                              $                <@RS_31@>
+52                          ACREEDORES DIVERSOS                                                                      <@RS_32@>                  <@RS_33@>
+53                                                                                                    -----------------------
+54                          PRESTAMOS DE BANCOS A LARGO PLAZO                                       $                <@RS_34@>
+55                          OTRAS OBLIGACIONES A LARGO PLAZO                                                         <@RS_35@>                  <@RS_36@>
+56                                                                                                    -----------------------
+57                          PROVISIONES PARA OBLIGACIONES DIVERSAS                                                                              <@RS_37@>
+58                          CERTIFICADOS DE PARTICIPACION EN CIRCULACION                                                                        <@RS_38@>
+59                          CREDITOS DIFERIDOS                                                                                                  <@RS_39@>
+60                                                                                                                                ----------------------
+61                                        T O T A L  P A S I V O                                                                $               <@RS_40@>
+62                                                                                                                                ----------------------
+63
+64
+65
+66                                           P A T R I M O N I O
+67                          PATRIMONIO                                                              $                <@RS_41@>
+68                          PATRIMONIO NO APORTADO Y APLICS PATRIMONIALES                                            <@RS_42@>  $               <@RS_43@>
+69                                                                                                    -----------------------
+70                          INSUFICIENCA EN LA ACTULIZACION DEL CAPITAL CONTABLE                                                                <@RS_44@>
+71                          REMANENTE DE EJERCICIOS ANTERIORES                                      $                <@RS_45@>
+72                          DEFICIENTE LIQUIDO DE EJERCICIOS ANTERIORES                                              <@RS_46@>
+73                          <@LABEL_47@>                                                                             <@RS_47@>                  <@RS_48@>
+74                                                                                                    -----------------------
+75                          REVALUACION DE ACTIVOS                                                                                              <@RS_49@>
+76                                                                                                                                ----------------------
+77                                        T O T A L  P A T R I M O N I O                                                        $               <@RS_50@>
+78                                                                                                                                ----------------------
+79                                        T O T A L  P A S I V O  Y  P A T R I M O N I O                                     $               <@RS_51@>
+80                                                                                                                                ======================
+81
+82                                        C U E N T A S  D E  O R D E N
+83                          OTRAS OBLIGACIONES CONTINGENTES                                                                     $               <@RS_52@>
+84                          VALORES Y BIENES EN DEPOSITO ADMON Y GARANTIA                                                                       <@RS_53@>
+85                          CUENTAS DEUDORAS DE REGISTRO                                                                                        <@RS_54@>
+86                          CUENTAS POR GRADO DE RIESGO CARTERA DE CREDITO                                                                      <@RS_55@>
+87                         RESERVA PARA INDEMNIZACION A EXCONCESIONARIOS                                                                       <@RS_56@>
+88                                                                                                                                  ----------------------
+89                                      T O T A L  C U E N T A S  D E  O R D E N                                              $               <@RS_57@>
+90                                                                                                                                  ======================
+91
+92
+93
+94
+95                                              <@RS_64@>                                                      <@RS_65@>                                                           
+96                                              <@RS_66@>                                                      <@RS_67@>                                                             
+97

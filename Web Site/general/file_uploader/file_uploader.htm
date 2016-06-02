@@ -1,0 +1,142 @@
+<HTML>
+<HEAD>
+<TITLE>Envío de archivos al servidor</TITLE>
+<META NAME="GENERATOR" Content="Microsoft FrontPage 4.0">
+<meta http-equiv="Pragma" content="no-cache">
+<script language="JavaScript" src="/empiria/bin/ms_scripts/rs.htm"></script>
+<link REL="stylesheet" TYPE="text/css" HREF="/empiria/resources/applications.css">
+<script language="JavaScript" src="/empiria/bin/client_scripts/general.js"></script>
+<SCRIPT ID=clientEventHandlersJS LANGUAGE=javascript>
+<!--
+
+function oFile() {
+	var ftpServer;
+	var	ftpDirectory;
+	var	ftpTransferTo;
+  var fileName;
+}
+
+function moveFile() {
+	var obj;
+	obj = RSExecute("../general_scripts.asp", "MoveFileFromFTPDir", oFile.ftpTransferTo, oFile.fileName);
+	return obj.return_value;	
+}
+
+function sendFile() {
+	var sFile;
+	var oUploadControl = document.all.aoxUploader;
+	
+	sFile = document.all.txtFile.value;
+	if (sFile == '') {
+		alert("Primero necesito la selección del archivo que se desea enviar.");
+		return false;
+	}
+	
+	document.all.divStatusBar.innerHTML = 'Transfiriendo el archivo ... ';
+	oUploadControl.File = sFile;
+	oUploadControl.DoTransfer();
+	while (true) {
+		if (oUploadControl.LastFileTransferSuccess) {
+			oFile.fileName = oUploadControl.FileName;
+			break;
+		}
+		if (oUploadControl.LastError != '') {
+			alert('Ocurrió el siguiente problema: \n\n' + oUploadControl.LastError);
+			document.all.divStatusBar.innerHTML = '';
+			return false;
+		}
+	}
+	document.all.divStatusBar.innerHTML = 'Moviendo el archivo ... ';
+	if (oFile.ftpTransferTo != '') {
+		if (!moveFile()) {
+			alert('Ocurrió un problema al mover el archivo al directorio: \n\n' + oFile.ftpTransferTo);
+			document.all.divStatusBar.innerHTML = '';
+			return false;			
+		};
+	}
+	document.all.divStatusBar.innerHTML = '';
+	//alert('La transferencia del archivo se efectuó con éxito');
+	return true;
+}
+
+function pickData() {
+	if (!sendFile()) {
+		return false;
+	}
+  if (window.dialogArguments != null) {
+		window.dialogArguments.fileName = oFile.fileName;
+  }
+  window.returnValue = true;
+  window.close();
+}
+
+function loadArguments() {
+	if (window.dialogArguments != null) {
+		oFile.ftpServer     = window.dialogArguments.ftpServer;
+		oFile.ftpDirectory  = window.dialogArguments.ftpDirectory;
+		oFile.ftpTransferTo = window.dialogArguments.ftpTransferTo;
+	}
+  document.all.aoxUploader.FTPServer = oFile.ftpServer;
+  document.all.aoxUploader.ServerDirectory = oFile.ftpDirectory;
+  window.returnValue = false;
+  return false;
+}
+
+//-->
+</SCRIPT>
+</HEAD>
+<BODY class=bdyDialogBox onload='loadArguments();'>
+<TABLE class=standardPageTable>
+	<TR>
+		<TD nowrap class=applicationTitle>
+			Envío de archivos al servidor
+		</TD>
+		<TD align=right nowrap>
+			<img align=absMiddle src="/empiria/images/help_red.gif" onclick='notAvailable();' alt="Ayuda">	
+			<img align=absMiddle src="/empiria/images/invisible.gif">
+			<img align=absMiddle src="/empiria/images/close_red.gif" onclick='window.close();' alt="Cerrar">
+		</TD>
+	</TR>
+	<TR>
+	</TR>
+  <TR>
+		<TD colspan=2 nowrap>
+			<TABLE class=applicationTable cellpadding=1>
+				<TR>
+					<TD colspan=2>
+						1) Seleccionar el archivo que se desea enviar:<br><br>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<INPUT type="file" name=txtFile style="HEIGHT: 22px; WIDTH: 440px;"><br><br>
+						<span id=divStatusBar></span><br>
+						2) Enviar el archivo al servidor haciendo clic en el botón 'Enviar':<br><br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<INPUT class=cmdSubmit type=button name=cmdSend value="Enviar" style="WIDTH: 80px" onclick='pickData();'>
+						&nbsp;&nbsp;&nbsp;
+						<INPUT class=cmdSubmit name=cmdCancel type=button value="Cancelar" style="WIDTH: 80px" onclick='window.close();'>
+					</TD>
+				</TR>
+			</TABLE>	
+		</TD>
+	</TR>
+</TABLE>
+<OBJECT classid='clsid:443B33BF-659C-440A-AEE1-7CA5287CFBE4' codebase="/cabs/aoupload.cab#version = -1,-1,-1,-1" name=aoxUploader VIEWASTEXT>
+	<PARAM NAME="_ExtentX" VALUE="0">
+  <PARAM NAME="_ExtentY" VALUE="0">
+  <PARAM NAME="AutoReplaceFile" VALUE="-1">
+  <PARAM NAME="BackColor" VALUE="10079743">
+  <PARAM NAME="BackStyle" VALUE="0">
+  <PARAM NAME="Enabled" VALUE="-1">
+  <PARAM NAME="FileSelectorFilter" VALUE="Todos los archivos (*.*)|*.*">
+  <PARAM NAME="ForeColor" VALUE="-2147483640">
+  <PARAM NAME="FTPServer" VALUE="">
+  <PARAM NAME="ServerDirectory" VALUE="">
+  <PARAM NAME="ShowSuccessTransferMsg" VALUE="0">
+  <PARAM NAME="Visible" VALUE="0">
+</OBJECT>
+</BODY>
+<script language="JavaScript">RSEnableRemoteScripting("/empiria/bin/ms_scripts/")</script>
+</HTML>

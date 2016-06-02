@@ -1,0 +1,90 @@
+CREATE TABLE AOEntities
+(
+ EntityId			NUMBER(12) PRIMARY KEY ,
+ EntityNamespace		VARCHAR2(64) NOT NULL ,
+ EntityName			VARCHAR2(64) NOT NULL ,
+ EntityDescription		VARCHAR2(512) , 
+ HasSubentities			NUMBER(1) NOT NULL , 
+ HasExtendedAttributes		NUMBER(1) NOT NULL , 
+ SourceTable			VARCHAR2(48) NOT NULL ,
+ ObjectIdFieldName		VARCHAR2(48) NOT NULL ,
+ SubentityFieldName		VARCHAR2(48) ,
+ ExtendedAttrsTable		VARCHAR2(48) ,
+ ExtendedAttrsSequence		VARCHAR2(48) 
+);
+
+CREATE TABLE AOEntityAttrDef
+(
+ EntityAttrDefId		NUMBER(12) PRIMARY KEY ,
+ EntityId			NUMBER(12) NOT NULL ,
+ ObjectId			NUMBER(12) NOT NULL ,
+ Namespace			VARCHAR2(128) NOT NULL ,
+ Description			VARCHAR2(255) ,
+ EasyName	     		VARCHAR2(128) ,
+ DataType			NUMBER(2) NOT NULL ,
+ Length				NUMBER(5) NOT NULL ,
+ Format				VARCHAR2(255) ,
+ DefaultValue			VARCHAR2(255) ,
+ IsMultiValueSet		NUMBER(1) NOT NULL ,
+ IsRequired			NUMBER(1) NOT NULL ,
+ KeepCiphered			NUMBER(1) NOT NULL ,
+ KeepHistory			NUMBER(1) NOT NULL ,
+ ValidationRule			VARCHAR2(1024) ,
+ HelpText			VARCHAR2(1024) ,
+ ViewOrder			NUMBER(5) NOT NULL ,
+ Enabled			NUMBER(1) NOT NULL
+);
+
+CREATE TABLE AOSetItems
+(
+ SetItemId			NUMBER(12) PRIMARY KEY ,
+ AttrDefId			NUMBER(12) NOT NULL ,
+ SetItemName			VARCHAR2(64) NOT NULL , 
+ SetItemValue			CHAR(1) NOT NULL ,
+ SetItemEasyName		VARCHAR2(128) , 
+ SetItemDescription		VARCHAR2(512) , 
+ IsDefault			NUMBER(1) NOT NULL , 
+ ViewOrder			NUMBER(5) NOT NULL
+);
+
+CREATE TABLE AOObjects
+(
+ ObjectId			NUMBER(12) PRIMARY KEY ,
+ EntityId			NUMBER(12) NOT NULL ,
+ ObjectName			VARCHAR2(255) NOT NULL ,
+ ObjectDescription		VARCHAR2(1024) ,
+ ObjectKey			VARCHAR2(255) ,
+ PresentationOrder		NUMBER(5) NOT NULL ,
+ Deleted			NUMBER(1) NOT NULL 
+);
+
+CREATE TABLE AOObjectAttrs
+(
+ ObjectAttrId			NUMBER(12) PRIMARY KEY ,
+ ObjectId			NUMBER(12) NOT NULL ,
+ EntityAttrDefId                NUMBER(12) NOT NULL ,
+ ValString			VARCHAR2(2048) ,
+ ValNumeric			NUMBER ,
+ ValDate			DATE ,
+ FromDate			DATE NOT NULL ,
+ ToDate				DATE NOT NULL 
+);
+
+/* AOObjectsRelations y AORelationTypes están pendientes */
+
+CREATE TABLE AOObjectsRelations
+(
+ ObjectRelationId		NUMBER(12) PRIMARY KEY ,
+ RelationTypeId			NUMBER(12) NOT NULL ,
+ ObjectAId			NUMBER(12) NOT NULL ,
+ ObjectBId			NUMBER(12) NOT NULL ,
+ FromDate			DATE NOT NULL ,
+ ToDate				DATE NOT NULL
+);
+
+CREATE TABLE AORelationTypes
+(
+ RelationTypeId			NUMBER(12) PRIMARY KEY ,
+ EntityAId			NUMBER(12) NOT NULL ,
+ EntityBId			NUMBER(12) NOT NULL
+);

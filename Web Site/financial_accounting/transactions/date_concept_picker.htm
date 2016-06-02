@@ -1,0 +1,90 @@
+<HTML>
+<HEAD>
+<TITLE>Editor de movimientos</TITLE>
+<META NAME="GENERATOR" Content="Microsoft Visual Studio 6.0">
+<script language="JavaScript" src="/empiria/bin/ms_scripts/rs.htm"></script>
+<link REL="stylesheet" TYPE="text/css" HREF="/empiria/resources/applications.css">
+<script language="JavaScript" src="/empiria/bin/client_scripts/general.js"></script>
+<script ID="clientEventHandlersJS" LANGUAGE="javascript">
+<!--
+
+function isDate(sDate) {
+	var obj;
+	obj = RSExecute("../financial_accounting_scripts.asp","IsDate", sDate);
+	return obj.return_value;
+}
+
+function cmdCheckSpelling_onclick() {
+	alert("Por el momento esta opción no está disponible.\n\nGracias.");
+}
+
+function pickData() {
+	if (document.all.txtPostingDate.value != '') {
+		if (!isDate(document.all.txtPostingDate.value)) {
+			alert('No reconozco la fecha del movimiento.');
+			return false;
+		}
+	}
+  if (window.dialogArguments != null) {
+      window.dialogArguments.postingDate = document.all.txtPostingDate.value;
+      window.dialogArguments.description = document.all.txtDescription.value;
+  }
+  window.returnValue = true;
+  window.close();
+}
+
+function loadArguments() {
+	if (window.dialogArguments != null) {
+		document.all.txtPostingDate.value = window.dialogArguments.postingDate;
+		document.all.txtDescription.value = window.dialogArguments.description;
+	}
+	window.returnValue = false;
+}
+
+//-->
+</SCRIPT>
+</HEAD>
+<BODY class=bdyDialogBox LANGUAGE=javascript onload="return loadArguments()">
+<TABLE class=standardPageTable>
+	<TR>
+		<TD nowrap class=applicationTitle>
+			Fecha y concepto del movimiento
+		</TD>
+		<TD align=right nowrap>
+			<img align=absMiddle src="/empiria/images/help_red.gif" onclick='notAvailable();' alt="Ayuda" width="15" height="15">	
+			<img align=absMiddle src="./empiria/images/invisible.gif" width="2" height="15">
+			<img align=absMiddle src="/empiria/images/close_red.gif" onclick='window.close();' alt="Cerrar" width="17" height="15">
+		</TD>
+	</TR>
+  <TR>
+		<TD colspan=2 nowrap>
+			<TABLE class=applicationTable cellpadding=1>
+				<TR>
+				  <TD>Fecha:</TD>
+				  <TD nowrap>
+						<INPUT name=txtPostingDate style="WIDTH: 100px">
+						<img align=absbottom src='/empiria/images/calendar.gif' alt='Despliega el calendario' onclick='showCalendar(document.all.txtPostingDate);' width="34" height="21">
+						&nbsp; (día / mes / año)
+					</TD>
+				</TR>
+				<TR>
+				  <TD>Concepto:</TD>
+				  <TD nowrap><TEXTAREA name=txtDescription rows=3 style="WIDTH: 235px"></TEXTAREA><br>
+						<INPUT type=button class=cmdSubmit name=cmdCheckSpelling value="Revisar ortografía" onclick="return cmdCheckSpelling_onclick()" tabindex=-1>
+					</TD>
+				</TR>
+				<TR>  
+				  <TD colspan=2 align=right nowrap>
+						<INPUT class=cmdSubmit name=cmdAddItem type=button value="Aceptar" style="WIDTH: 50px" onclick='pickData();'>&nbsp;&nbsp;&nbsp;
+						<INPUT class=cmdSubmit name=cmdCancel type=button value="Cancelar" style="WIDTH: 50px" onclick='window.close();'>
+						&nbsp; &nbsp; &nbsp; 
+					</TD>
+				</TR>
+			</TABLE>
+		</TD>
+	</TR>
+</TABLE>
+</BODY>
+</BODY>
+<script language="JavaScript">RSEnableRemoteScripting("/empiria/bin/ms_scripts/")</script>
+</HTML>

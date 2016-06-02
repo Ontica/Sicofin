@@ -1,0 +1,125 @@
+BODY
+{
+    BACKGROUND-COLOR: white;
+    FONT-FAMILY: Arial, Helvetica, sans-serif;
+    FONT-SIZE: 8pt
+}
+.TaskTable
+{
+    BACKGROUND-COLOR: #ff9900;
+    COLOR: maroon;
+    FONT-FAMILY: Arial, Helvetica, sans-serif;
+    FONT-SIZE: 8pt
+}
+.serviceTable
+{
+    COLOR: #ce6331;
+    FONT-FAMILY: Arial, Helvetica, sans-serif;
+    FONT-SIZE: 8pt
+}
+.newsTitle
+{
+    COLOR: #ce6331;
+    FONT-FAMILY: Arial, Helvetica, sans-serif;
+    FONT-SIZE: 10pt;
+    FONT-WEIGHT: bold
+}
+.newsAbstract
+{
+    COLOR: black;
+    FONT-FAMILY: Arial, Helvetica, sans-serif;
+    FONT-SIZE: 8pt;
+    TEXT-ALIGN: justify
+}
+.sectionDivision
+{
+    BACKGROUND-COLOR: burlywood;
+    COLOR: maroon;
+    FONT-FAMILY: Arial, Helvetica, sans-serif;
+    FONT-SIZE: 8pt;
+    FONT-WEIGHT: 500;
+    PADDING-LEFT: 4pt;
+    PADDING-RIGHT: 4pt
+}
+.tip
+{
+    BACKGROUND-COLOR: lemonchiffon;
+    COLOR: maroon;
+    FONT-FAMILY: Arial, Helvetica, sans-serif;
+    FONT-SIZE: 8pt;
+    PADDING-BOTTOM: 3pt;
+    PADDING-LEFT: 3pt;
+    PADDING-RIGHT: 3pt;
+    PADDING-TOP: 3pt
+}
+A:link
+{
+    COLOR: blue;
+    TEXT-DECORATION: none
+}
+A:visited
+{
+    COLOR: blue;
+    TEXT-DECORATION: none
+}
+A:active
+{
+    COLOR: blue;
+    TEXT-DECORATION: none
+}
+A:hover
+{
+    COLOR: blue;
+    TEXT-DECORATION: underline
+}
+.serviceTable A:link
+{
+    COLOR: #ce6331;
+    TEXT-DECORATION: none
+}
+.serviceTable A:visited
+{
+    COLOR: #ce6331;
+    TEXT-DECORATION: none
+}
+.serviceTable A:active
+{
+    COLOR: #ce6331;
+    TEXT-DECORATION: none
+}
+.serviceTable A:hover
+{
+    COLOR: #ce6331;
+    TEXT-DECORATION: underline
+}
+.TaskTable A:link
+{
+    COLOR: maroon;
+    TEXT-DECORATION: none
+}
+.TaskTable A:visited
+{
+    COLOR: maroon;
+    TEXT-DECORATION: none
+}
+.TaskTable A:hover
+{
+    COLOR: maroon;
+    TEXT-DECORATION: underline
+}
+.imageBtn
+{
+    CURSOR: hand
+}
+.optionsMenu
+{
+    BACKGROUND-COLOR: #ff9900;
+    COLOR: maroon;
+    FONT-FAMILY: Arial, Helvetica, sans-serif;
+    FONT-SIZE: 8pt
+}
+BODY TABLE
+{
+    FONT-FAMILY: Arial, Helvetica, sans-serif;
+    FONT-SIZE: 8pt
+}

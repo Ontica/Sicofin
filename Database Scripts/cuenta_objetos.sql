@@ -1,0 +1,67 @@
+SELECT MAX(id_transaccion),  'COF_TRANSACCION' AS "NombreTabla" FROM COF_TRANSACCION ;
+
+SELECT MAX(id_movimiento), 'COF_MOVIMIENTO' AS "NombreTabla" FROM COF_MOVIMIENTO ;
+
+SELECT MAX(id_movimiento_tmp), 'COF_MOVIMIENTO_TMP' AS "NombreTabla" FROM COF_MOVIMIENTO_TMP ;
+
+SELECT MAX(id_saldo_inicial), 'COF_SALDO_INICIAL' AS "NombreTabla" FROM COF_SALDO_INICIAL ;
+
+SELECT MAX(id_mayor), 'COF_MAYOR' AS "NombreTabla" FROM COF_MAYOR ;
+
+SELECT MAX(id_cuenta_estandar), 'COF_CUENTA_ESTANDAR' AS "NombreTabla" FROM COF_CUENTA_ESTANDAR ;
+
+SELECT MAX(id_cuenta_estandar_hist), 'COF_CUENTA_ESTANDAR_HIST' AS "NombreTabla" FROM COF_CUENTA_ESTANDAR_HIST ;
+
+SELECT MAX(id_cuenta), 'COF_CUENTA' AS "NombreTabla" FROM COF_CUENTA ;
+
+SELECT MAX(id_cuenta_hist), 'COF_CUENTA_HIST' AS "NombreTabla" FROM COF_CUENTA_HIST ;
+
+SELECT MAX(id_mayor_auxiliar), 'COF_MAYOR_AUXILIAR' AS "NombreTabla" FROM COF_MAYOR_AUXILIAR ;
+
+SELECT MAX(id_cuenta_auxiliar), 'COF_CUENTA_AUXILIAR' AS "NombreTabla" FROM COF_CUENTA_AUXILIAR ;
+
+SELECT MAX(id_attr_cuenta_auxiliar), 'COF_ATTR_CUENTA_AUXILIAR' AS "NombreTabla" FROM COF_ATTR_CUENTA_AUXILIAR ;
+
+SELECT MAX(id_sector), 'COF_SECTOR' AS "NombreTabla" FROM COF_SECTOR ;
+
+SELECT MAX(id_grupo_mayor), 'COF_GRUPO_MAYOR' AS "NombreTabla" FROM COF_GRUPO_MAYOR ;
+
+SELECT MAX(id_elemento_grupo_mayor), 'COF_ELEMENTO_GRUPO_MAYOR' AS "NombreTabla" FROM COF_ELEMENTO_GRUPO_MAYOR ;
+
+SELECT MAX(id_agrupacion), 'COF_AGRUPACION' AS "NombreTabla" FROM COF_AGRUPACION ;
+
+SELECT MAX(id_regla_agrupacion), 'COF_REGLA_AGRUPACION' AS "NombreTabla" FROM COF_REGLA_AGRUPACION ;
+
+SELECT MAX(id_empresa), 'COF_EMPRESA' AS "NombreTabla" FROM COF_EMPRESA ;
+
+SELECT MAX(id_domicilio), 'COF_DOMICILIO' AS "NombreTabla" FROM COF_DOMICILIO ;
+
+SELECT MAX(calendar_id), 'AO_CALENDARS' AS "NombreTabla" FROM AO_CALENDARS ;
+
+SELECT MAX(holiday_id), 'AO_HOLIDAYS' AS "NombreTabla" FROM AO_HOLIDAYS ;
+
+SELECT MAX(period_id), 'AO_PERIODS' AS "NombreTabla" FROM AO_PERIODS ;
+
+SELECT MAX(currency_id), 'AO_CURRENCIES' AS "NombreTabla" FROM AO_CURRENCIES ;
+
+SELECT MAX(exchange_rate_id), 'AO_EXCHANGE_RATES' AS "NombreTabla" FROM AO_EXCHANGE_RATES ;
+
+SELECT MAX(entity_id), 'AO_ENTITIES' AS "NombreTabla" FROM AO_ENTITIES ;
+
+SELECT MAX(entity_attribute_id), 'AO_ENTITY_ATTRIBUTES' AS "NombreTabla" FROM AO_ENTITY_ATTRIBUTES ;
+
+SELECT MAX(entity_attr_def_id), 'AO_ENTITY_ATTR_DEF' AS "NombreTabla" FROM AO_ENTITY_ATTR_DEF ;
+
+SELECT MAX(attr_def_id), 'AO_ATTR_DEF' AS "NombreTabla" FROM AO_ATTR_DEF ;
+
+SELECT MAX(set_item_id), 'AO_SET_ITEMS' AS "NombreTabla" FROM AO_SET_ITEMS ;
+
+SELECT MAX(object_id), 'AO_OBJECTS' AS "NombreTabla" FROM AO_OBJECTS ;
+
+SELECT MAX(node_id), 'AO_TREES' AS "NombreTabla" FROM AO_TREES ;
+
+SELECT MAX(participant_id), 'MH_PARTICIPANTS' AS "NombreTabla" FROM MH_PARTICIPANTS ;
+
+SELECT MAX(participant_object_id), 'MH_PARTICIPANT_OBJECTS' AS "NombreTabla" FROM MH_PARTICIPANT_OBJECTS ;
+
+SELECT MAX(task_id), 'MH_TASKS' AS "NombreTabla" FROM MH_TASKS ;

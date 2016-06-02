@@ -1,0 +1,157 @@
+A
+{
+    COLOR: white;
+    FONT-SIZE: 8pt;
+    TEXT-DECORATION: none
+}
+A:hover
+{
+    COLOR: #ffffff;
+    FONT-SIZE: 8pt;
+    TEXT-DECORATION: underline
+}
+BODY
+{
+    BACKGROUND-COLOR: #003333;
+    COLOR: white;
+    FONT-FAMILY: Arial, Helvetica, sans-serif;
+    FONT-SIZE: 8pt
+}
+TABLE
+{
+    COLOR: white;
+    FONT-FAMILY: Arial, Helvetica, sans-serif;
+    FONT-SIZE: 8pt
+}
+.linksTable
+{
+    BACKGROUND-COLOR: #1c6392;
+    BACKGROUND-POSITION: center center;
+    BACKGROUND-REPEAT: repeat;
+    COLOR: white;
+    FONT-FAMILY: Arial, Helvetica, sans-serif;
+    FONT-SIZE: 8pt
+}
+.cmdButton
+{
+    BACKGROUND-COLOR: #d3d3d3;
+    BACKGROUND-IMAGE: none;
+    BACKGROUND-REPEAT: repeat;
+    BORDER-BOTTOM: #a9a9a9 1px solid;
+    BORDER-LEFT: lightgrey 1px solid;
+    BORDER-RIGHT: #a9a9a9 1px solid;
+    BORDER-TOP: lightgrey 1px solid;
+    COLOR: #000000;
+    CURSOR: hand;
+    FONT-FAMILY: Arial, Helvetica, sans-serif;
+    FONT-SIZE: 11px;
+    HEIGHT: 20px;
+    TEXT-DECORATION: none
+}
+A:active
+{
+    COLOR: #ffffff
+}
+A:visited
+{
+    COLOR: #ffffff
+}
+.copyright
+{
+    COLOR: black;
+    FONT-SIZE: 7pt;
+    TEXT-ALIGN: center
+}
+.copyright A
+{
+    COLOR: black;
+    FONT-SIZE: 7pt
+}
+.copyright A:link
+{
+    COLOR: black;
+    FONT-SIZE: 7pt
+}
+.copyright A:visited
+{
+    COLOR: black;
+    FONT-SIZE: 7pt
+}
+.copyright A:active
+{
+    COLOR: black;
+    FONT-SIZE: 7pt
+}
+.formTable
+{
+    COLOR: black
+}
+.optionsTable
+{
+    BORDER-BOTTOM: #4682b4 2px solid;
+    BORDER-LEFT: medium none;
+    BORDER-RIGHT: #4682b4 2px solid;
+    BORDER-TOP: medium none
+}
+.optionsTable A
+{
+    COLOR: #466f9d;
+    TEXT-DECORATION: none
+}
+.optionsTable A:link
+{
+    COLOR: #466f9d;
+    TEXT-DECORATION: none
+}
+.optionsTable A:active
+{
+    COLOR: #466f9d;
+    TEXT-DECORATION: none
+}
+.optionsTable A:visited
+{
+    COLOR: #466f9d;
+    TEXT-DECORATION: none
+}
+.optionsTable A:hover
+{
+    COLOR: #466f9d;
+    TEXT-DECORATION: underline
+}
+.linksTable A
+{
+    COLOR: white
+}
+.linksTable A:link
+{
+    COLOR: white
+}
+.linksTable A:active
+{
+    COLOR: white
+}
+.linksTable A:visited
+{
+    COLOR: white
+}
+.linksTable A:hover
+{
+    COLOR: white
+}
+.separator
+{
+    BACKGROUND-COLOR: #dcdcdc;
+    BACKGROUND-IMAGE: url(../images/separator.jpg);
+    COLOR: white
+}
+.logonTable
+{
+    BACKGROUND: url(../images/ontica.jpg) white fixed no-repeat right bottom;
+    COLOR: black;
+    HEIGHT: 100%;
+    PADDING-BOTTOM: 0px;
+    PADDING-LEFT: 0px;
+    PADDING-RIGHT: 0px;
+    PADDING-TOP: 0px;
+    WIDTH: 100%
+}

@@ -1,0 +1,36 @@
+BODY
+{
+    BACKGROUND-COLOR: #fafad2;
+    COLOR: white;
+    FONT-FAMILY: Tahoma, Arial, Helvetica, sans-serif;
+    FONT-SIZE: 1pc
+}
+A:link
+{
+    COLOR: white;
+    FONT-SIZE: 8pt;
+    TEXT-DECORATION: none
+}
+A:visited
+{
+    COLOR: white;
+    FONT-SIZE: 8pt;
+    TEXT-DECORATION: none
+}
+A:active
+{
+    COLOR: white;
+    FONT-SIZE: 8pt;
+    TEXT-DECORATION: none
+}
+A:hover
+{
+    COLOR: #f0e68c;
+    FONT-SIZE: 8pt;
+    TEXT-DECORATION: none
+}
+BODY TABLE
+{
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 8pt
+}

@@ -1,0 +1,102 @@
+Sistema Internet de Contabilidad Financiera Empiria® versión 1.0 
+Individualización para el Banco Nacional de Obras y Servicios Públicos, S.N.C
+---------------------------------------------------------------------------------
+
+Copyright (c) La Vía Ontica, S.C. México 1999-2002. Todos los derechos reservados.
+
+Empiria, Ontica, La Vía Ontica y Mahler, así como sus logotipos, son marcas 
+registradas por La Vía Ontica, S.C. en México.
+
+El software, su documentación, así como todos los elementos de configuración 
+y diseño del mismo están protegidos por las leyes federales e internacionales 
+de derechos de autor.
+
+MUY IMPORTANTE: Toda violación a los derechos de autor de esta obra será
+                perseguida hasta sus últimas consecuencias, conforme a las 
+                leyes aplicables en México y en el extranjero.
+
+---------------------------------------------------------------------------------
+0.   Contenido de este CD-ROM
+---------------------------------------------------------------------------------
+
+
+\Binaries			Contiene los programas ejecutables del sistema
+
+\Data				Datos del sistema y archivos de configuración
+
+  \Database scripts		Scripts en Oracle para la creación de 
+                                tablas, stored procedures y secuencias
+
+  \Financial Accounting		Archivos XML de configuración del Sistema Internet
+				de Contabilidad Financiera
+
+  \Oracle 8.1.6 DB Backup	Respaldo de la base de datos en producción en 
+				Oracle 8i del Sistema Internet de Contabilidad
+				Financiera Empiria® al 23 de abril del 2002
+				
+  \Workflow Management		Archivos XML de configuración del Sistema Administrador 
+				del flujo de trabajo Empiria®
+
+  .Sicofin-Banobras.reg		Registro de configuración de las aplicaciones
+
+
+\Resources			Programas varios que pueden emplearse en la instalación
+				como Internet Explorer 5.5, Visual Basic 6.0 SP 5.0, etc.
+
+\Sources			Código fuente de las aplicaciones
+
+  \Financial Accounting		Código fuente del Sistema Internet de COntabilidad Financiera
+
+  \General Modules		Módulos .BAS generales para el acceso a bases de datos. Estos
+				módulos se emplean frencuentemente en los componentes del
+				data services que conforman la aplicación.
+
+  \Individualization		Código fuente de los componentes desarrollados específicamente
+				para el Banco Nacional de Obras y Servicios Públicos, S.N.C,
+				como las interfaces con Sigro, PyC y el sistema GEM
+
+\WebSite\empiria		Sitio web donde se montan todos los sistemas
+
+   \bin				Scripts generales de las aplicaciones y archivos ejecutables
+
+   \central			Páginas para los componentes centrales Empiria®
+
+   \customer_comp		Páginas para los componentes específicos de la individualización
+				del Sistema Internet de Contabilidad Financiera para el
+				Banco Nacional de Obras y Servicios Públicos, s.N.C
+
+   \end_user_prog		Páginas para los componentes de la categoría programación de 
+				usuario final Empiria®. (e.g, diseñador de reportes)
+
+   \financial_accounting	Páginas para los componentes del Sistema Internet de Conabilidad
+				Financiera Empiria®
+
+   \general			Páginas para los componentes generales Empiria®. (e.g, monedas)
+
+   \images			Repositorio central con todas las imágenes del portal
+
+   \portal			Páginas que constituyen el portal central de la aplicación
+
+   \resources			Archivos Cascade Style Sheets (CSS) para el diseño del sitio
+
+   \user_files			Archivos y directorios con documentos y archivos enviados
+				vía FTP por los usuarios (e.g. patrones de reportes)
+
+   \workflow			Páginas para los componentes del Sistema Administrador del Flujo
+				de Trabajo Empiria®
+
+   .default.asp			Página de inicio de la intranet corporativa
+
+   .global.asa			Archivo con la configuración general del sitio
+
+
+.Contenido del CD.txt		Este documento
+
+.Notas de instalación.txt	Documento con las especificaciones para la instalación del sistema
+
+.SCF-SPD-2002-1.doc		Documento Microsoft® Word con la descripción del producto de software
+				del Sistema Internet de Contabilidad Financiera Empiria®
+
+---------------------------------------------------------------------------------
+Fin del documento
+

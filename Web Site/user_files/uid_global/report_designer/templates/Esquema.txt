@@ -1,0 +1,111 @@
+
+
+
+
+
+
+
+
+
+
+                                             <@RS_68@>
+                                             <@RS_69@>
+
+
+                                             ESTADO DE RESULTADOS POR EL PERIODO DEL <@RS_70@>
+
+
+                                            I N G R E S O S
+         1         2         3         4         5         6         7         8         9        10        11        12        13        14        15        16
+1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
+                          INGRESOS POR CUOTAS DE PEAJE                                                                               <@RS_71@>
+
+                          VENTA DE INMUEBLES                                                                                         <@RS_72@>
+
+                          INGRESOS POR SERVICIOS                                                                                     <@RS_73@>
+
+                          INGRESOS POR ARRENDAMIENTO                                                                                 <@RS_74@>
+
+                          INTERESES COBRADOS PROGRAMA UDIS                                                                           <@RS_75@>
+
+                          INTERESES COBRADOS                                                                                         <@RS_76@>
+
+                          INGRESOS POR COBERTURAS CAMBIARIAS                                                                         <@RS_77@>
+
+                          COMISIONES COBRADAS                                                                                        <@RS_78@>
+
+                          BENEFICIOS Y PRODUCTOS DIVERSOS                                                                            <@RS_79@>
+
+                          INTERCAMBIO DE RENDIMIENTOS A FAVOR                                                                        <@RS_80@>
+
+                          RECUPERACIONES                                                                                             <@RS_81@>
+                                                                                                                           ------------------
+                                            T O T A L  I N G R E S O S                                                               <@RS_82@>
+                                                                                                                           ------------------
+
+                                               E G R E S O S
+
+                          OTROS GASTOS DE OPERACION, MTTO. Y ASISTENCIA TEC.                                                         <@RS_83@>
+
+                          COSTO DE INMUEBLES VENDIDOS                                                                                <@RS_84@>
+
+                          INTERESES DEVENGADOS SOBRE PRESTAMOS EN UDIS                                                               <@RS_85@>
+
+                          OTROS GASTOS DE ADMINISTRACION                                                                             <@RS_86@>
+
+                          INTERESES PAGADOS                                                                                          <@RS_87@>
+
+                          HONORARIOS Y COMISIONES PAGADAS                                                                            <@RS_88@>
+
+                          DEPRECIACIONES Y AMORTIZACIONES                                                                            <@RS_89@>
+
+                          QUEBRANTOS DIVERSOS                                                                                        <@RS_90@>
+
+
+
+
+
+
+
+
+
+
+                                             <@RS_91@>
+                                             <@RS_92@>
+         1         2         3         4         5         6         7         8         9        10        11        12        13        14        15        16
+1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
+                                             ESTADO DE RESULTADOS POR EL PERIODO DEL <@RS_93@>
+
+
+                                               E G R E S O S
+
+                          RECUP. GTOS. ADMTVOS. A FAVOR DEL FIDEICOMITENTE                                                           <@RS_94@>
+
+                          GASTOS NO RECUPERABLES                                                                                     <@RS_95@>
+
+                          SUBSIDIO POR INTERCAMBIO DE RENDIMIENTOS                                                                   <@RS_96@>
+
+                          CAMBIOS                                                                                                    <@RS_97@>
+
+                          COSTOS POR CUENTA DE FIDEICOMITENTES P.E.A.                                                                <@RS_98@>
+
+                          RESULTADO POR POSICION MONETARIA                                                                           <@RS_99@>
+         1         2         3         4         5         6         7         8         9        10        11        12        13        14        15        16
+1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+                                                                                                                           ------------------
+                                      T O T A L  E G R E S O S                                                                      <@RS_100@>
+                                                                                                                           ------------------
+                                          <@LABEL_101@>                                                                             <@RS_101@>
+                                                                                                                           ==================
+         1         2         3         4         5         6         7         8         9        10        11        12        13        14        15        16
+1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+
+
+         1         2         3         4         5         6         7         8         9        10        11        12        13        14        15        16
+1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+                                                   <@RS_102@>                                                            <@RS_103@>                                      
+                                                   <@RS_104@>                                                            <@RS_105@>                                      
+

@@ -1,0 +1,18 @@
+<SCRIPT LANGUAGE=VBScript RUNAT=Server>
+
+Sub Application_OnStart()
+  Application("error_page") = "/empiria/central/exceptions/exception.asp"
+  Application("exit_page")  = "/empiria/central/login/logout.asp"
+  Application("main_page")  = "/empiria/portal/main.asp"  
+End Sub
+
+Sub Session_OnStart()
+	Application("sAppServer") = "Ontica"
+	Session("sAppServer") = "Ontica"
+	Session("uid") = 0
+	Session("user_name") = ""
+	Session.Timeout = 240
+End Sub
+
+</SCRIPT>
+

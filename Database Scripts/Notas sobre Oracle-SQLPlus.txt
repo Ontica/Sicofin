@@ -1,0 +1,21 @@
+NOTAS SOBRE ORACLE/ SQL Plus
+
+CREATE TABLESPACE nombre_ts datafile 'C:\oracle\data\sicofin.dbf' SIZE 50M;
+
+CREATE USER sa IDENTIFIED BY ontica
+DEFAULT TABLESPACE nombre_ts TEMPORARY TABLESPACE temp;
+
+GRANT connect, resource, dba to sa;
+
+
+
+SELECT object_name, object_type FROM sys.dba_objects WHERE owner = 'sa';
+
+SELECT * FROM user_objects;
+
+select object_name from user_objects WHERE object_type = 'PROCEDURE';
+
+select * from user_objects WHERE object_type = 'FUNCTION';
+
+
+select text from user_source where name like 'SP_APD_TRANSACTION' order by line
